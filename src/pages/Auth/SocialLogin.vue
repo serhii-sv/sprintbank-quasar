@@ -26,9 +26,7 @@ export default {
 
   methods: {
     useAuthProvider(provider, proData) {
-      const pro = proData
-
-      const ProData = pro || Providers[provider]
+      const ProData = proData || Providers[provider]
       this.$Oauth.authenticate(provider, ProData).then((response) => {
         const rsp = response
         if (rsp.code) {

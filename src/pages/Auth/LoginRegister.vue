@@ -11,21 +11,21 @@
           class="q-mb-md"
           label="ФИО *"
         />
-<!--        <p v-show="$v.username.$dirty && !$v.username.required" class="text-red">-->
-<!--          Имя пользователя обязательное поле-->
-<!--        </p>-->
-<!--        <p v-show="availableUsername === false" class="text-red">-->
-<!--          Имя пользователя уже используется-->
-<!--        </p>-->
+        <!--        <p v-show="$v.username.$dirty && !$v.username.required" class="text-red">-->
+        <!--          Имя пользователя обязательное поле-->
+        <!--        </p>-->
+        <!--        <p v-show="availableUsername === false" class="text-red">-->
+        <!--          Имя пользователя уже используется-->
+        <!--        </p>-->
       </div>
       <div v-show="tab == 'register' || tab == 'edit'">
-      <q-input
-        dense
-        v-model.trim="email"
-        class="q-mb-md"
-        type="email"
-        placeholder="ivanpetrov@gmail.com"
-        label="Email *"/>
+        <q-input
+          dense
+          v-model.trim="email"
+          class="q-mb-md"
+          type="email"
+          placeholder="ivanpetrov@gmail.com"
+          label="Email *"/>
       </div>
       <q-input
         dense
@@ -34,15 +34,15 @@
         type="login"
         placeholder="ivanpetrov123"
         label="Логин *"/>
-<!--      <p v-show="!$v.email.email" class="text-red">-->
-<!--        Введите реальный E-mail-->
-<!--      </p>-->
-<!--      <p v-show="$v.email.$dirty && !$v.email.required" class="text-red">-->
-<!--        E-mail обязателен к заполнению-->
-<!--      </p>-->
-<!--      <p v-show="availableEmail === false" class="text-red">-->
-<!--        Email уже используется-->
-<!--      </p>-->
+      <!--      <p v-show="!$v.email.email" class="text-red">-->
+      <!--        Введите реальный E-mail-->
+      <!--      </p>-->
+      <!--      <p v-show="$v.email.$dirty && !$v.email.required" class="text-red">-->
+      <!--        E-mail обязателен к заполнению-->
+      <!--      </p>-->
+      <!--      <p v-show="availableEmail === false" class="text-red">-->
+      <!--        Email уже используется-->
+      <!--      </p>-->
 
       <div v-show="tab != 'edit'">
         <q-input
@@ -51,9 +51,9 @@
           class="q-mb-md"
           type="password"
           label="Пароль *"/>
-<!--        <p v-show="$v.password.$dirty && !$v.password.required" class="text-red">-->
-<!--          Пароль обязательное поле-->
-<!--        </p>-->
+        <!--        <p v-show="$v.password.$dirty && !$v.password.required" class="text-red">-->
+        <!--          Пароль обязательное поле-->
+        <!--        </p>-->
       </div>
       <div v-show="tab == 'register'">
         <q-input
@@ -62,26 +62,26 @@
           class="q-mb-md"
           type="password"
           label="Подтверждение пароля *"/>
-<!--        <p v-if="$v.password.$dirty && !$v.password.required" class="error">-->
-<!--          Пароль обязателен к заполнению-->
-<!--        </p>-->
-<!--        <p v-if="!$v.passwordConfirmation.sameAsPassword" class="error">-->
-<!--          Пароли должны совпадать-->
-<!--        </p>-->
+        <!--        <p v-if="$v.password.$dirty && !$v.password.required" class="error">-->
+        <!--          Пароль обязателен к заполнению-->
+        <!--        </p>-->
+        <!--        <p v-if="!$v.passwordConfirmation.sameAsPassword" class="error">-->
+        <!--          Пароли должны совпадать-->
+        <!--        </p>-->
       </div>
       <div>
-<!--        <q-toggle-->
-<!--          v-if="tab == 'register'"-->
-<!--          class="text-white"-->
-<!--          color="green"-->
-<!--          true-value="Author"-->
-<!--          false-value="Student"-->
-<!--          v-model="role"-->
-<!--          text-color="white"-->
-<!--          :label="$t(role)"-->
-<!--          checked-icon="edit"-->
-<!--          unchecked-icon="clear"-->
-<!--        />-->
+        <!--        <q-toggle-->
+        <!--          v-if="tab == 'register'"-->
+        <!--          class="text-white"-->
+        <!--          color="green"-->
+        <!--          true-value="Author"-->
+        <!--          false-value="Student"-->
+        <!--          v-model="role"-->
+        <!--          text-color="white"-->
+        <!--          :label="$t(role)"-->
+        <!--          checked-icon="edit"-->
+        <!--          unchecked-icon="clear"-->
+        <!--        />-->
       </div>
       <div v-show="tab == 'edit'">
         <q-input
@@ -91,15 +91,17 @@
           label="Телефон *"/>
       </div>
       <p class="text-red" v-if="error">{{ error }}</p>
-
+      <div v-if="tab == 'login'">
+        <q-btn class="no-margin no-padding" to="reset" flat>Забыли пароль?</q-btn>
+      </div>
       <q-btn
         class="bg-primary text-white q-mt-md"
         type="submit">
         {{ tab }}
       </q-btn>
-<q-no-ssr>
-      <SocialLogin v-if="tab !== 'edit'"/>
-</q-no-ssr>
+      <q-no-ssr>
+        <SocialLogin v-if="tab !== 'edit'"/>
+      </q-no-ssr>
     </q-form>
 
   </div>
@@ -123,8 +125,8 @@ export default {
       store
     }
   },
-  data(){
-    return{
+  data() {
+    return {
       role: 'user',
       login: this.login ? this.user.login : null,
       email: this.user ? this.user.email : null,
@@ -168,7 +170,7 @@ export default {
         multiLine: true,
       })
     },
-    logout(){
+    logout() {
       if (this.$route.fullPath !== '/') {
         this.$router.push("/");
       }

@@ -10,6 +10,11 @@ const routes = [
         path: "auth",
         component: () => import("pages/Auth/Auth.vue")
       },
+      {
+        name: "reset",
+        path: "reset",
+        component: () => import("pages/Auth/ResetPassword.vue")
+      },
     ]
   },
 
