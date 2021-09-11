@@ -23,7 +23,7 @@
                         <q-separator/>
                         <q-item dense clickable class="text-black" to="/dashboard">Dashboard</q-item>
                         <q-separator/>
-                        <q-item dense clickable class="text-black" to="/profile">Транзакции</q-item>
+                        <q-item dense clickable class="text-black" to="/transactions">Транзакции</q-item>
                         <q-separator/>
                         <q-item dense clickable class="text-black" to="/profile">Выход</q-item>
                       </q-list>

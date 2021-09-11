@@ -26,6 +26,11 @@ const routes = [
         component: () => import("pages/News/News.vue")
       },
       {
+        name: "transactions",
+        path: "transactions",
+        component: () => import("pages/User/Transactions.vue")
+      },
+      {
         name: "reset",
         path: "reset",
         component: () => import("pages/Auth/ResetPassword.vue")
