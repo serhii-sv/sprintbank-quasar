@@ -38,7 +38,6 @@
   import LoginRegister from "./LoginRegister";
 
   export default {
-    // props: ['hide', 'tab'],
     props: ['hide'],
     data() {
       return {

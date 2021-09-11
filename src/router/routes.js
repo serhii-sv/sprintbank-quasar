@@ -11,6 +11,21 @@ const routes = [
         component: () => import("pages/Auth/Auth.vue")
       },
       {
+        name: "profile",
+        path: "profile",
+        component: () => import("pages/User/Profile.vue")
+      },
+      {
+        name: "dashboard",
+        path: "dashboard",
+        component: () => import("pages/User/Dashboard.vue")
+      },
+      {
+        name: "news",
+        path: "news",
+        component: () => import("pages/News/News.vue")
+      },
+      {
         name: "reset",
         path: "reset",
         component: () => import("pages/Auth/ResetPassword.vue")
