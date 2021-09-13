@@ -1,4 +1,25 @@
 // app global css in SCSS form
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;200;400;600;700;800;900&display=swap');
+a{
+  text-decoration: none!important;
+}
+
+body {
+  background: #1D1D1D;
+  color: #fff
+}
+h1{
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  color: #fff;
+}
+
+h1 span{
+  font-weight: 300;
+}
+
 .font-12 {
   font-size: 12px;
 }

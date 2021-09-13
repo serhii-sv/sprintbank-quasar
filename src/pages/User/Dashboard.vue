@@ -1,8 +1,12 @@
 <template>
-  <q-page class="q-pa-sm">
-    <card-social icon_position="right" />
-
-    <q-card class="q-mt-sm">
+  <div class="q-pt-md">
+    <div class="q-pa-md">
+      <p class="text-h6 text-weight-light">Здравствуй Иван!</p>
+      <p class="text-h5">Ненастное утро может смениться ясным днём.</p>
+    </div>
+<!--    <card-social icon_position="right" />-->
+    <card-charts/>
+    <div class="q-mt-sm">
       <q-card-section class="text-h6 q-pb-none">
         <q-item>
           <q-item-section avatar class="">
@@ -10,59 +14,39 @@
           </q-item-section>
 
           <q-item-section>
-            <div class="text-h6">Product Sales Stats</div>
+            <div class="text-h6">Статистика продаж</div>
           </q-item-section>
         </q-item>
       </q-card-section>
-      <q-card-section class="row">
+      <q-card-section class="row bg-dark">
         <div class="col-lg-7 col-sm-12 col-xs-12 col-md-7">
-          <div class="row">
-            <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
               <q-item>
                 <q-item-section top avatar>
-                  <q-avatar color="blue" text-color="white" icon="bluetooth" />
+                  <q-avatar size="50px" rounded text-color="white" class="bg-grey-10" icon="fab fa-bitcoin" />
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-h6 text-blue text-bold">4321</q-item-label>
-                  <q-item-label caption>Fashions</q-item-label>
-                </q-item-section>
-              </q-item>
-            </div>
-            <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
-              <q-item>
-                <q-item-section top avatar>
-                  <q-avatar color="grey-8" text-color="white" icon="bluetooth" />
+                  <q-item-label class="text-h6 text-white">Bitcoin</q-item-label>
+                  <q-item-label class="text-grey-7 text-bold" caption>0.1 BTC</q-item-label>
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class="text-h6 text-grey-8 text-bold">9876</q-item-label>
-                  <q-item-label caption>Electronics</q-item-label>
-                </q-item-section>
+                <q-item-label class="text-h6 text-white text-right">$22.610.00</q-item-label>
+                <q-item-label class="text-grey-7 text-bold text-right" caption>-2.53%</q-item-label>
+              </q-item-section>
               </q-item>
-            </div>
-            <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
-              <q-item>
-                <q-item-section top avatar>
-                  <q-avatar color="green-6" text-color="white" icon="bluetooth" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="text-h6 text-green-6 text-bold">345</q-item-label>
-                  <q-item-label caption>Toys</q-item-label>
-                </q-item-section>
-              </q-item>
-            </div>
-            <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
-              <q-item>
-                <q-item-section top avatar>
-                  <q-avatar color="orange-8" text-color="white" icon="bluetooth" />
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label class="text-h6 text-orange-8 text-bold">1021</q-item-label>
-                  <q-item-label caption>Vouchers</q-item-label>
-                </q-item-section>
-              </q-item>
-            </div>
-          </div>
-          <div>
+          <q-item>
+            <q-item-section top avatar>
+              <q-avatar size="50px" rounded text-color="white" class="bg-grey-10" icon="fab fa-ethereum" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-h6 text-white">Etherium</q-item-label>
+              <q-item-label class="text-grey-7 text-bold" caption>0.1 BTC</q-item-label>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-h6 text-white text-right">$14.000.00</q-item-label>
+              <q-item-label class="text-grey-7 text-bold text-right" caption>+ 1,33%</q-item-label>
+            </q-item-section>
+          </q-item>
+          <div class="q-py-md">
             <vue-echarts style="height: 250px" :option="getSalesOptions" :resizable="true" />
           </div>
         </div>
@@ -81,260 +65,262 @@
           </div>
         </div>
       </q-card-section>
-    </q-card>
-    <q-card class="q-mt-sm">
-      <q-card-section class="text-h6 q-pb-none">
-        <q-item>
-          <q-item-section avatar class="">
-            <q-icon color="blue" name="fa fa-shopping-cart" size="44px" />
-          </q-item-section>
+    </div>
+<!--    <q-card class="q-mt-sm">-->
+<!--      <q-card-section class="text-h6 q-pb-none">-->
+<!--        <q-item>-->
+<!--          <q-item-section avatar class="">-->
+<!--            <q-icon color="blue" name="fa fa-shopping-cart" size="44px" />-->
+<!--          </q-item-section>-->
 
-          <q-item-section>
-            <q-item-label>
-              <div class="text-h6">Latest Sales</div>
-            </q-item-label>
-            <q-item-label caption class="text-black">
-              Monitoring Your products. Tracking sales, and shipping status here.
-            </q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-card-section>
-<!--      <q-card-section class="q-pa-none q-ma-none">-->
-<!--        <q-table class="no-shadow no-border" :data="sales_data" :columns="sales_column" hide-bottom>-->
-<!--          <template v-slot:body-cell-Products="props">-->
-<!--            <q-td :props="props">-->
-<!--              <q-item>-->
-<!--                <q-item-section>-->
-<!--                  <q-avatar square>-->
-<!--                    <img :src="props.row.prod_img" />-->
-<!--                  </q-avatar>-->
-<!--                </q-item-section>-->
+<!--          <q-item-section>-->
+<!--            <q-item-label>-->
+<!--              <div class="text-h6">Latest Sales</div>-->
+<!--            </q-item-label>-->
+<!--            <q-item-label caption class="text-black">-->
+<!--              Monitoring Your products. Tracking sales, and shipping status here.-->
+<!--            </q-item-label>-->
+<!--          </q-item-section>-->
+<!--        </q-item>-->
+<!--      </q-card-section>-->
+<!--&lt;!&ndash;      <q-card-section class="q-pa-none q-ma-none">&ndash;&gt;-->
+<!--&lt;!&ndash;        <q-table class="no-shadow no-border" :data="sales_data" :columns="sales_column" hide-bottom>&ndash;&gt;-->
+<!--&lt;!&ndash;          <template v-slot:body-cell-Products="props">&ndash;&gt;-->
+<!--&lt;!&ndash;            <q-td :props="props">&ndash;&gt;-->
+<!--&lt;!&ndash;              <q-item>&ndash;&gt;-->
+<!--&lt;!&ndash;                <q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-avatar square>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img :src="props.row.prod_img" />&ndash;&gt;-->
+<!--&lt;!&ndash;                  </q-avatar>&ndash;&gt;-->
+<!--&lt;!&ndash;                </q-item-section>&ndash;&gt;-->
 
-<!--                <q-item-section>-->
-<!--                  <q-item-label>{{ props.row.code }}</q-item-label>-->
-<!--                  <q-item-label>{{ props.row.product_name }}</q-item-label>-->
-<!--                </q-item-section>-->
-<!--              </q-item>-->
-<!--            </q-td>-->
-<!--          </template>-->
-<!--          <template v-slot:body-cell-Name="props">-->
-<!--            <q-td :props="props">-->
-<!--              <q-item>-->
+<!--&lt;!&ndash;                <q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-item-label>{{ props.row.code }}</q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-item-label>{{ props.row.product_name }}</q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                </q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;              </q-item>&ndash;&gt;-->
+<!--&lt;!&ndash;            </q-td>&ndash;&gt;-->
+<!--&lt;!&ndash;          </template>&ndash;&gt;-->
+<!--&lt;!&ndash;          <template v-slot:body-cell-Name="props">&ndash;&gt;-->
+<!--&lt;!&ndash;            <q-td :props="props">&ndash;&gt;-->
+<!--&lt;!&ndash;              <q-item>&ndash;&gt;-->
+<!--&lt;!&ndash;                <q-item-section avatar>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-avatar>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img :src="props.row.avatar" />&ndash;&gt;-->
+<!--&lt;!&ndash;                  </q-avatar>&ndash;&gt;-->
+<!--&lt;!&ndash;                </q-item-section>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-item-label>{{ props.row.name }}</q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-item-label caption class="">Purchased date: <br />{{ props.row.date }}</q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                </q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;              </q-item>&ndash;&gt;-->
+<!--&lt;!&ndash;            </q-td>&ndash;&gt;-->
+<!--&lt;!&ndash;          </template>&ndash;&gt;-->
+<!--&lt;!&ndash;          <template v-slot:body-cell-Status="props">&ndash;&gt;-->
+<!--&lt;!&ndash;            <q-td :props="props" class="text-left">&ndash;&gt;-->
+<!--&lt;!&ndash;              <q-chip class="text-white text-capitalize" :label="props.row.status" :color="getChipColor(props.row.status)"></q-chip>&ndash;&gt;-->
+<!--&lt;!&ndash;            </q-td>&ndash;&gt;-->
+<!--&lt;!&ndash;          </template>&ndash;&gt;-->
+<!--&lt;!&ndash;          <template v-slot:body-cell-Stock="props">&ndash;&gt;-->
+<!--&lt;!&ndash;            <q-td :props="props">&ndash;&gt;-->
+<!--&lt;!&ndash;              <q-item>&ndash;&gt;-->
+<!--&lt;!&ndash;                <q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="text-blue">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <q-icon name="bug_report" color="blue" size="20px" v-if="props.row.type == 'error'"></q-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <q-icon name="settings" color="blue" size="20px" v-if="props.row.type == 'info'"></q-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <q-icon name="flag" color="blue" size="20px" v-if="props.row.type == 'success'"></q-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                      <q-icon name="fireplace" color="blue" size="20px" v-if="props.row.type == 'warning'"></q-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                      {{ props.row.stock }}&ndash;&gt;-->
+<!--&lt;!&ndash;                    </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="positive" v-if="props.row.type == 'success'"></q-chip>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="info" v-if="props.row.type == 'info'"></q-chip>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="warning" v-if="props.row.type == 'warning'"></q-chip>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="negative" v-if="props.row.type == 'error'"></q-chip>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <q-item-label caption class="">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <q-linear-progress dark :color="getColor(props.row.Progress)" :value="props.row.Progress / 100" />&ndash;&gt;-->
+<!--&lt;!&ndash;                  </q-item-label>&ndash;&gt;-->
+<!--&lt;!&ndash;                </q-item-section>&ndash;&gt;-->
+<!--&lt;!&ndash;              </q-item>&ndash;&gt;-->
+<!--&lt;!&ndash;            </q-td>&ndash;&gt;-->
+<!--&lt;!&ndash;          </template>&ndash;&gt;-->
+<!--&lt;!&ndash;        </q-table>&ndash;&gt;-->
+<!--&lt;!&ndash;      </q-card-section>&ndash;&gt;-->
+<!--    </q-card>-->
+
+<!--    <div class="row q-col-gutter-sm  q-py-sm">-->
+<!--      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--        <q-card>-->
+<!--          <q-tabs v-model="tab" dense class="text-grey" active-color="primary" indicator-color="primary" align="justify">-->
+<!--            <q-tab name="contact" :class="tab == 'contact' ? 'text-blue' : ''" icon="contacts" label="Contact" />-->
+<!--            <q-tab name="message" :class="tab == 'message' ? 'text-blue' : ''" icon="comment" label="Message">-->
+<!--              <q-badge color="red" floating>{{ messages.length }}</q-badge>-->
+<!--            </q-tab>-->
+<!--            <q-tab name="notification" :class="tab == 'notification' ? 'text-blue' : ''" icon="notifications" label="Notification">-->
+<!--              <q-badge color="red" floating>4</q-badge>-->
+<!--            </q-tab>-->
+<!--          </q-tabs>-->
+
+<!--          <q-separator />-->
+
+<!--          <q-tab-panels v-model="tab" animated>-->
+<!--            <q-tab-panel name="contact" class="q-pa-sm">-->
+<!--              <q-list class="rounded-borders" separator>-->
+<!--                <q-item v-for="(contact, index) in contacts" :key="index">-->
+<!--                  <q-item-section avatar>-->
+<!--                    <q-avatar>-->
+<!--                      <img :src="contact.avatar" />-->
+<!--                    </q-avatar>-->
+<!--                  </q-item-section>-->
+
+<!--                  <q-item-section>-->
+<!--                    <q-item-label lines="1">{{ contact.name }}</q-item-label>-->
+<!--                    <q-item-label caption lines="2">-->
+<!--                      <span class="text-weight-bold">{{ contact.position }}</span>-->
+<!--                    </q-item-label>-->
+<!--                  </q-item-section>-->
+
+<!--                  <q-item-section side>-->
+<!--                    <div class="text-white q-gutter-xs">-->
+<!--                      <q-btn class="gt-xs" size="md" flat color="blue" dense round icon="comment" />-->
+<!--                      <q-btn class="gt-xs" size="md" flat color="red" dense round icon="email" />-->
+<!--                      <q-btn size="md" flat dense round color="green" icon="phone" />-->
+<!--                    </div>-->
+<!--                  </q-item-section>-->
+<!--                </q-item>-->
+<!--              </q-list>-->
+<!--            </q-tab-panel>-->
+
+<!--            <q-tab-panel name="message" class="q-pa-sm">-->
+<!--              <q-item v-for="msg in messages" :key="msg.id" clickable v-ripple>-->
 <!--                <q-item-section avatar>-->
 <!--                  <q-avatar>-->
-<!--                    <img :src="props.row.avatar" />-->
+<!--                    <img :src="msg.avatar" />-->
 <!--                  </q-avatar>-->
 <!--                </q-item-section>-->
 
 <!--                <q-item-section>-->
-<!--                  <q-item-label>{{ props.row.name }}</q-item-label>-->
-<!--                  <q-item-label caption class="">Purchased date: <br />{{ props.row.date }}</q-item-label>-->
+<!--                  <q-item-label>{{ msg.name }}</q-item-label>-->
+<!--                  <q-item-label caption lines="1">{{ msg.msg }}</q-item-label>-->
+<!--                </q-item-section>-->
+
+<!--                <q-item-section side>-->
+<!--                  {{ msg.time }}-->
 <!--                </q-item-section>-->
 <!--              </q-item>-->
-<!--            </q-td>-->
-<!--          </template>-->
-<!--          <template v-slot:body-cell-Status="props">-->
-<!--            <q-td :props="props" class="text-left">-->
-<!--              <q-chip class="text-white text-capitalize" :label="props.row.status" :color="getChipColor(props.row.status)"></q-chip>-->
-<!--            </q-td>-->
-<!--          </template>-->
-<!--          <template v-slot:body-cell-Stock="props">-->
-<!--            <q-td :props="props">-->
-<!--              <q-item>-->
-<!--                <q-item-section>-->
-<!--                  <q-item-label>-->
-<!--                    <span class="text-blue">-->
-<!--                      <q-icon name="bug_report" color="blue" size="20px" v-if="props.row.type == 'error'"></q-icon>-->
-<!--                      <q-icon name="settings" color="blue" size="20px" v-if="props.row.type == 'info'"></q-icon>-->
-<!--                      <q-icon name="flag" color="blue" size="20px" v-if="props.row.type == 'success'"></q-icon>-->
-<!--                      <q-icon name="fireplace" color="blue" size="20px" v-if="props.row.type == 'warning'"></q-icon>-->
-<!--                      {{ props.row.stock }}-->
-<!--                    </span>-->
-<!--                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="positive" v-if="props.row.type == 'success'"></q-chip>-->
-<!--                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="info" v-if="props.row.type == 'info'"></q-chip>-->
-<!--                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="warning" v-if="props.row.type == 'warning'"></q-chip>-->
-<!--                    <q-chip class="float-right text-white text-capitalize" :label="props.row.type" color="negative" v-if="props.row.type == 'error'"></q-chip>-->
-<!--                  </q-item-label>-->
-<!--                  <q-item-label caption class="">-->
-<!--                    <q-linear-progress dark :color="getColor(props.row.Progress)" :value="props.row.Progress / 100" />-->
-<!--                  </q-item-label>-->
-<!--                </q-item-section>-->
-<!--              </q-item>-->
-<!--            </q-td>-->
-<!--          </template>-->
-<!--        </q-table>-->
-<!--      </q-card-section>-->
-    </q-card>
+<!--            </q-tab-panel>-->
 
-    <div class="row q-col-gutter-sm  q-py-sm">
-      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <q-card>
-          <q-tabs v-model="tab" dense class="text-grey" active-color="primary" indicator-color="primary" align="justify">
-            <q-tab name="contact" :class="tab == 'contact' ? 'text-blue' : ''" icon="contacts" label="Contact" />
-            <q-tab name="message" :class="tab == 'message' ? 'text-blue' : ''" icon="comment" label="Message">
-              <q-badge color="red" floating>{{ messages.length }}</q-badge>
-            </q-tab>
-            <q-tab name="notification" :class="tab == 'notification' ? 'text-blue' : ''" icon="notifications" label="Notification">
-              <q-badge color="red" floating>4</q-badge>
-            </q-tab>
-          </q-tabs>
+<!--            <q-tab-panel name="notification" class="q-pa-sm">-->
+<!--              <q-list>-->
+<!--                <q-item clickable v-ripple>-->
+<!--                  <q-item-section avatar>-->
+<!--                    <q-avatar color="teal" text-color="white" icon="info" />-->
+<!--                  </q-item-section>-->
 
-          <q-separator />
+<!--                  <q-item-section>Avatar-type icon</q-item-section>-->
+<!--                </q-item>-->
+<!--                <q-item clickable v-ripple>-->
+<!--                  <q-item-section avatar>-->
+<!--                    <q-avatar color="teal" text-color="white" icon="report" />-->
+<!--                  </q-item-section>-->
 
-          <q-tab-panels v-model="tab" animated>
-            <q-tab-panel name="contact" class="q-pa-sm">
-              <q-list class="rounded-borders" separator>
-                <q-item v-for="(contact, index) in contacts" :key="index">
-                  <q-item-section avatar>
-                    <q-avatar>
-                      <img :src="contact.avatar" />
-                    </q-avatar>
-                  </q-item-section>
+<!--                  <q-item-section>Avatar-type icon</q-item-section>-->
+<!--                </q-item>-->
+<!--                <q-item clickable v-ripple>-->
+<!--                  <q-item-section avatar>-->
+<!--                    <q-avatar color="teal" text-color="white" icon="remove" />-->
+<!--                  </q-item-section>-->
 
-                  <q-item-section>
-                    <q-item-label lines="1">{{ contact.name }}</q-item-label>
-                    <q-item-label caption lines="2">
-                      <span class="text-weight-bold">{{ contact.position }}</span>
-                    </q-item-label>
-                  </q-item-section>
+<!--                  <q-item-section>Avatar-type icon</q-item-section>-->
+<!--                </q-item>-->
 
-                  <q-item-section side>
-                    <div class="text-grey-8 q-gutter-xs">
-                      <q-btn class="gt-xs" size="md" flat color="blue" dense round icon="comment" />
-                      <q-btn class="gt-xs" size="md" flat color="red" dense round icon="email" />
-                      <q-btn size="md" flat dense round color="green" icon="phone" />
-                    </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-tab-panel>
+<!--                <q-item clickable v-ripple>-->
+<!--                  <q-item-section avatar>-->
+<!--                    <q-avatar color="teal" text-color="white" icon="remove_circle_outline" />-->
+<!--                  </q-item-section>-->
 
-            <q-tab-panel name="message" class="q-pa-sm">
-              <q-item v-for="msg in messages" :key="msg.id" clickable v-ripple>
-                <q-item-section avatar>
-                  <q-avatar>
-                    <img :src="msg.avatar" />
-                  </q-avatar>
-                </q-item-section>
+<!--                  <q-item-section>Avatar-type icon</q-item-section>-->
+<!--                </q-item>-->
+<!--              </q-list>-->
+<!--            </q-tab-panel>-->
+<!--          </q-tab-panels>-->
+<!--        </q-card>-->
+<!--      </div>-->
 
-                <q-item-section>
-                  <q-item-label>{{ msg.name }}</q-item-label>
-                  <q-item-label caption lines="1">{{ msg.msg }}</q-item-label>
-                </q-item-section>
+<!--      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+<!--        <q-carousel animated v-model="slide" infinite height="360px" arrows transition-prev="slide-right" transition-next="slide-left">-->
+<!--          <q-carousel-slide :name="1" class="q-pa-none">-->
+<!--            <q-scroll-area class="fit">-->
+<!--              <q-card class="my-card">-->
+<!--                <img :src="require('src/assets/coding.jpeg')" />-->
 
-                <q-item-section side>
-                  {{ msg.time }}
-                </q-item-section>
-              </q-item>
-            </q-tab-panel>
+<!--                <q-card-section>-->
+<!--                  <div class="text-h6">Work with something that you like, like…</div>-->
+<!--                  <div class="text-subtitle2">by John Doe</div>-->
+<!--                </q-card-section>-->
 
-            <q-tab-panel name="notification" class="q-pa-sm">
-              <q-list>
-                <q-item clickable v-ripple>
-                  <q-item-section avatar>
-                    <q-avatar color="teal" text-color="white" icon="info" />
-                  </q-item-section>
+<!--                <q-card-actions align="left">-->
+<!--                  <q-btn label="Share" dense color="primary" text-color="blue" outline />-->
+<!--                  <q-btn label="Learn More" dense color="primary" text-color="blue" outline />-->
+<!--                </q-card-actions>-->
+<!--              </q-card>-->
+<!--            </q-scroll-area>-->
+<!--          </q-carousel-slide>-->
+<!--          <q-carousel-slide :name="2" class="q-pa-none">-->
+<!--            <q-scroll-area class="fit">-->
+<!--              <q-card class="my-card">-->
+<!--                <img :src="require('src/assets/lookgood.jpeg')" />-->
 
-                  <q-item-section>Avatar-type icon</q-item-section>
-                </q-item>
-                <q-item clickable v-ripple>
-                  <q-item-section avatar>
-                    <q-avatar color="teal" text-color="white" icon="report" />
-                  </q-item-section>
+<!--                <q-card-section>-->
+<!--                  <div class="text-h6">Keep your schedule in the right time</div>-->
+<!--                  <div class="text-subtitle2">-->
+<!--                    Aenean facilisis vitae purus facilisis semper.-->
+<!--                  </div>-->
+<!--                </q-card-section>-->
 
-                  <q-item-section>Avatar-type icon</q-item-section>
-                </q-item>
-                <q-item clickable v-ripple>
-                  <q-item-section avatar>
-                    <q-avatar color="teal" text-color="white" icon="remove" />
-                  </q-item-section>
+<!--                <q-card-actions align="left">-->
+<!--                  <q-btn label="Share" dense color="primary" text-color="blue" outline />-->
+<!--                  <q-btn label="Learn More" dense color="primary" text-color="blue" outline />-->
+<!--                </q-card-actions>-->
+<!--              </q-card>-->
+<!--            </q-scroll-area>-->
+<!--          </q-carousel-slide>-->
+<!--          <q-carousel-slide :name="3" class="q-pa-none">-->
+<!--            <q-scroll-area class="fit">-->
+<!--              <q-card class="my-card">-->
+<!--                <img :src="require('src/assets/trawel.jpeg')" />-->
 
-                  <q-item-section>Avatar-type icon</q-item-section>
-                </q-item>
+<!--                <q-card-section>-->
+<!--                  <div class="text-h6">Travel everytime that you have a chance</div>-->
+<!--                  <div class="text-subtitle2">Curabitur egestas consequat lorem, vel fermentum augue porta id.</div>-->
+<!--                </q-card-section>-->
 
-                <q-item clickable v-ripple>
-                  <q-item-section avatar>
-                    <q-avatar color="teal" text-color="white" icon="remove_circle_outline" />
-                  </q-item-section>
-
-                  <q-item-section>Avatar-type icon</q-item-section>
-                </q-item>
-              </q-list>
-            </q-tab-panel>
-          </q-tab-panels>
-        </q-card>
-      </div>
-
-      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <q-carousel animated v-model="slide" infinite height="360px" arrows transition-prev="slide-right" transition-next="slide-left">
-          <q-carousel-slide :name="1" class="q-pa-none">
-            <q-scroll-area class="fit">
-              <q-card class="my-card">
-                <img :src="require('src/assets/coding.jpeg')" />
-
-                <q-card-section>
-                  <div class="text-h6">Work with something that you like, like…</div>
-                  <div class="text-subtitle2">by John Doe</div>
-                </q-card-section>
-
-                <q-card-actions align="left">
-                  <q-btn label="Share" dense color="primary" text-color="blue" outline />
-                  <q-btn label="Learn More" dense color="primary" text-color="blue" outline />
-                </q-card-actions>
-              </q-card>
-            </q-scroll-area>
-          </q-carousel-slide>
-          <q-carousel-slide :name="2" class="q-pa-none">
-            <q-scroll-area class="fit">
-              <q-card class="my-card">
-                <img :src="require('src/assets/lookgood.jpeg')" />
-
-                <q-card-section>
-                  <div class="text-h6">Keep your schedule in the right time</div>
-                  <div class="text-subtitle2">
-                    Aenean facilisis vitae purus facilisis semper.
-                  </div>
-                </q-card-section>
-
-                <q-card-actions align="left">
-                  <q-btn label="Share" dense color="primary" text-color="blue" outline />
-                  <q-btn label="Learn More" dense color="primary" text-color="blue" outline />
-                </q-card-actions>
-              </q-card>
-            </q-scroll-area>
-          </q-carousel-slide>
-          <q-carousel-slide :name="3" class="q-pa-none">
-            <q-scroll-area class="fit">
-              <q-card class="my-card">
-                <img :src="require('src/assets/trawel.jpeg')" />
-
-                <q-card-section>
-                  <div class="text-h6">Travel everytime that you have a chance</div>
-                  <div class="text-subtitle2">Curabitur egestas consequat lorem, vel fermentum augue porta id.</div>
-                </q-card-section>
-
-                <q-card-actions align="left">
-                  <q-btn label="Share" dense color="primary" text-color="blue" outline />
-                  <q-btn label="Learn More" dense color="primary" text-color="blue" outline />
-                </q-card-actions>
-              </q-card>
-            </q-scroll-area>
-          </q-carousel-slide>
-        </q-carousel>
-      </div>
-    </div>
-  </q-page>
+<!--                <q-card-actions align="left">-->
+<!--                  <q-btn label="Share" dense color="primary" text-color="blue" outline />-->
+<!--                  <q-btn label="Learn More" dense color="primary" text-color="blue" outline />-->
+<!--                </q-card-actions>-->
+<!--              </q-card>-->
+<!--            </q-scroll-area>-->
+<!--          </q-carousel-slide>-->
+<!--        </q-carousel>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
 </template>
 
 <script>
 import {VueEcharts} from "vue3-echarts";
 import CardSocial from "components/cards/CardSocial";
+import CardCharts from "components/cards/CardCharts";
 
 export default {
   name: "Dashboard",
   components: {
+    CardCharts,
     VueEcharts,
-    CardSocial
+    // CardSocial
   },
   data() {
     return {

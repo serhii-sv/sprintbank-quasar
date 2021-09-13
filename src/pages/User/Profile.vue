@@ -14,6 +14,7 @@
         >
           <q-tab class="w-100" label="Ваши данные" name="profile"/>
           <q-tab class="w-100" label="Авторизация" name="auth-data"/>
+          <q-tab class="w-100" label="Реквизиты" name="requisite"/>
           <q-tab class="w-100" label="Платежи" name="pack"/>
         </q-tabs>
         <q-separator/>
@@ -24,13 +25,13 @@
               <div class="row">
                 <div class="col-12 col-md-12">
                   <form
-                    class="q-pt-xl"
+                    class="q-pt-md"
                     @submit.prevent="submitProfileForm"
                   >
                     <div class="row justify-between">
                       <div class="col-12 col-md-9">
                         <div class="row q-pb-md">
-                          <div class="col-12 col-md-4 mt-2  q-pa-sm">
+                          <div class="col-12 col-md-4 q-pa-sm">
                             <q-input
                               v-model="user.username"
                               class="mt-1"
@@ -44,6 +45,60 @@
                               </template>
                             </q-input>
                           </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                              <q-select
+                                v-model="user.gender"
+                                :options="options"
+                                type="text"
+                                outlined
+                                label="Пол"
+                                stack-label
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon name="person"/>
+                                </template>
+                              </q-select>
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                              <q-input
+                                v-model="user.phone"
+                                id="input5"
+                                type="text"
+                                outlined
+                                label="Телефон"
+                                stack-label
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon name="phone"/>
+                                </template>
+                              </q-input>
+                            </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                              <q-input
+                                v-model="user.country"
+                                type="text"
+                                outlined
+                                label="Страна"
+                                stack-label
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon name="place"/>
+                                </template>
+                              </q-input>
+                            </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                              <q-input
+                                v-model="user.city"
+                                type="text"
+                                outlined
+                                label="Город"
+                                stack-label
+                              >
+                                <template v-slot:prepend>
+                                  <q-icon name="place"/>
+                                </template>
+                              </q-input>
+                            </div>
                           <div class="col-12 col-md-4 q-pa-sm">
                             <q-input
                               v-model="user.birth"
@@ -67,34 +122,6 @@
                               </template>
                             </q-input>
                           </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                              <q-select
-                                v-model="user.gender"
-                                :options="options"
-                                type="text"
-                                outlined
-                                label="Пол"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="person"/>
-                                </template>
-                              </q-select>
-                          </div>
-                          <div class="col-12 col-md-4 mt-2 q-pa-sm">
-                              <q-input
-                                v-model="user.phone"
-                                id="input5"
-                                type="text"
-                                outlined
-                                label="Телефон"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="place"/>
-                                </template>
-                              </q-input>
-                            </div>
                         </div>
                       </div>
                     </div>
@@ -229,6 +256,176 @@
             </form>
 
           </q-tab-panel>
+          <q-tab-panel name="requisite">
+            <div class="text-h6 text-black">Ваши Реквизиты</div>
+            <form>
+              <div class="row">
+                <div class="col-12 col-md-12">
+                  <form
+                    class="q-pt-md"
+                    @submit.prevent="submitProfileForm"
+                  >
+                    <div class="row justify-between">
+                      <div class="col-12 col-md-9">
+                        <div class="row q-pb-md">
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.card"
+                              class="mt-1"
+                              type="text"
+                              outlined
+                              label="Visa/Mastercard"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.perfectMoney"
+                              class="mt-1"
+                              type="text"
+                              outlined
+                              label="Visa/Mastercard"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.qiwi"
+                              type="text"
+                              outlined
+                              label="Qiwi"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.advCash"
+                              type="text"
+                              outlined
+                              label="Adv Cash"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.yooMoney"
+                              type="text"
+                              outlined
+                              label="YooMoney"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.bitcoin"
+                              type="text"
+                              outlined
+                              label="BitCoin"
+                              stack-label
+                              />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.bitcoin"
+                              type="text"
+                              outlined
+                              label="BitCoin"
+                              stack-label
+                              />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.payeer"
+                              type="text"
+                              outlined
+                              label="Payeer"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.liteCoin"
+                              type="text"
+                              outlined
+                              label="LiteCoin"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.dogeCoin"
+                              type="text"
+                              outlined
+                              label="DogeCon"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.etherium"
+                              type="text"
+                              outlined
+                              label="Etherium"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.ripple"
+                              type="text"
+                              outlined
+                              label="Ripple"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.erc20"
+                              type="text"
+                              outlined
+                              label="TetherUsd ERC20"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.trc20"
+                              type="text"
+                              outlined
+                              label="TetherUsd TRC20"
+                              stack-label
+                            />
+                          </div>
+                          <div class="col-12 col-md-4 q-pa-sm">
+                            <q-input
+                              v-model="user.paypal"
+                              type="text"
+                              outlined
+                              label="PayPal"
+                              stack-label
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-12"
+                    >
+                      <q-btn
+                        @click="submitProfileForm"
+                        class="bg-primary q-ml-sm text-white"
+                      >
+                        Обновить информацию
+                      </q-btn>
+                      <p v-if="this.message" class="text-success">
+                        {{ message }}
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </form>
+          </q-tab-panel>
 
           <q-tab-panel name="pack">
             <div class="text-h6 text-black">Платежи</div>
@@ -311,6 +508,24 @@ export default {
         email: 'ivanov1988@gmail.com',
         login: 'ivanov_1988',
         birth: '1988/09/07',
+        country: 'Россия',
+        city: 'Москва',
+        card: '1234 1234 1234 1234',
+        perfectMoney: 'U12345768',
+        advCash: 'vanov1988@gmail.com',
+        qiwi: '+7 984 384 4224',
+        yooMoney: '410123123123',
+        bitcoin: '18QAjfijwfe34352552354234jfFj',
+        payeer: '18QAjfijwfe34352552354234jfFj',
+        liteCoin: '18QAjfijwfe34352552354234jfFj',
+        dogeCoin: '18QAjfijwfe34352552354234jfFj',
+        etherium: '18QAjfijwfe34352552354234jfFj',
+        ripple: '18QAjfijwfe34352552354234jfFj',
+        erc20: '18QAjfijwfe34352552354234jfFj',
+        trc20: '18QAjfijwfe34352552354234jfFj',
+        paypal: 'vanov1988@gmail.com',
+
+
     }
     // console.log(this.user)
   },

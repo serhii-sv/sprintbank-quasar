@@ -31,6 +31,16 @@ const routes = [
         component: () => import("pages/User/Transactions.vue")
       },
       {
+        name: "referal",
+        path: "referal",
+        component: () => import("pages/User/Referal.vue")
+      },
+      {
+        name: "referals",
+        path: "referals",
+        component: () => import("pages/User/Referals.vue")
+      },
+      {
         name: "reset",
         path: "reset",
         component: () => import("pages/Auth/ResetPassword.vue")
