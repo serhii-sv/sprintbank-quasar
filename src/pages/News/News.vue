@@ -2,18 +2,18 @@
   <q-page class="q-pa-sm">
     <div class="text-h6 q-ma-md">Новости</div>
     <q-separator/>
-    <CardPagination></CardPagination>
+    <CardSlider></CardSlider>
   </q-page>
 </template>
 
 <script>
 
-import CardPagination from "components/paginations/CardPagination";
+import CardSlider from "components/cards/CardSlider";
 
 export default {
   name: "News",
   components: {
-    CardPagination
+    CardSlider
   },
 }
 </script>

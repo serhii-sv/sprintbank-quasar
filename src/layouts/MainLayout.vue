@@ -8,6 +8,7 @@
             <!--              <div class="column">-->
             <!--                <div class="text-h6 q-mb-md">Настройки</div>-->
             <q-list dark class="column text-left">
+              <q-btn class="font-12" flat to="/statistics" label="Статистика"/>
               <q-btn class="font-12" flat to="/news" label="Новости"/>
               <q-separator/>
               <q-btn flat label="Аккаунт">
@@ -54,7 +55,7 @@
             <!--            </div>-->
           </q-menu>
         </q-btn>
-          <router-link to="/">
+          <router-link to="/dashboard">
             <h1>
               <b>Sprint</b><span>Bank</span>
             </h1>

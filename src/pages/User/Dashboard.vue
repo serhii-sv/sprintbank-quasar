@@ -1,12 +1,12 @@
 <template>
   <div class="q-pt-md">
-    <div class="q-pa-md">
+    <div class="q-px-md">
       <p class="text-h6 text-weight-light">Здравствуй Иван!</p>
       <p class="text-h5">Ненастное утро может смениться ясным днём.</p>
     </div>
 <!--    <card-social icon_position="right" />-->
     <card-charts/>
-    <div class="q-mt-sm">
+    <div>
       <q-card-section class="text-h6 q-pb-none">
         <q-item>
           <q-item-section avatar class="">
@@ -57,7 +57,7 @@
             </q-item-section>
 
             <q-item-section>
-              <div class="text-h6">TODAY SALES</div>
+              <div class="text-h6">Продажи сегодня</div>
             </q-item-section>
           </q-item>
           <div>

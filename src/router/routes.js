@@ -36,6 +36,11 @@ const routes = [
         component: () => import("pages/User/Referal.vue")
       },
       {
+        name: "statistics",
+        path: "statistics",
+        component: () => import("pages/Statistics/Statistics.vue")
+      },
+      {
         name: "referals",
         path: "referals",
         component: () => import("pages/User/Referals.vue")

@@ -7,32 +7,63 @@
           inline-label
           indicator-color="accent"
           active-color="accent"
-          class="text-black"
+          class="text-white"
           dense
           align="justify"
           narrow-indicator
         >
           <q-tab class="w-100" label="Ваши данные" name="profile"/>
-          <q-tab class="w-100" label="Авторизация" name="auth-data"/>
           <q-tab class="w-100" label="Реквизиты" name="requisite"/>
           <q-tab class="w-100" label="Платежи" name="pack"/>
         </q-tabs>
         <q-separator/>
-        <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="profile">
-            <div class="text-h6 text-black">Профайл</div>
-            <form>
+        <q-tab-panels class="bg-dark" v-model="tab" animated>
+          <q-tab-panel dark name="profile">
+<!--            <div class="text-h6 text-white">Профайл</div>-->
               <div class="row">
                 <div class="col-12 col-md-12">
                   <form
-                    class="q-pt-md"
                     @submit.prevent="submitProfileForm"
                   >
                     <div class="row justify-between">
                       <div class="col-12 col-md-9">
-                        <div class="row q-pb-md">
+                        <div class="row">
+                          <div class="col-12 col-md-6 q-pa-sm">
+                            <q-input dark
+                                     class="mt-1"
+                                     id="mail"
+                                     type="text"
+                                     v-model="user.email"
+                                     outlined
+                                     disabled
+                                     readonly
+                                     label="E-Mail"
+                                     stack-label
+                            >
+                              <template v-slot:prepend>
+                                <q-icon name="mail"/>
+                              </template>
+                            </q-input>
+                          </div>
+                          <div class="col-12 col-md-6 q-pa-sm">
+                            <q-input dark
+                                     class="mt-1"
+                                     id="mail"
+                                     type="text"
+                                     v-model="user.login"
+                                     outlined
+                                     disabled
+                                     readonly
+                                     label="Логин"
+                                     stack-label
+                            >
+                              <template v-slot:prepend>
+                                <q-icon name="person"/>
+                              </template>
+                            </q-input>
+                          </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.username"
                               class="mt-1"
                               type="text"
@@ -47,6 +78,7 @@
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
                               <q-select
+                                dark
                                 v-model="user.gender"
                                 :options="options"
                                 type="text"
@@ -60,7 +92,7 @@
                               </q-select>
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                              <q-input
+                              <q-input dark
                                 v-model="user.phone"
                                 id="input5"
                                 type="text"
@@ -74,7 +106,7 @@
                               </q-input>
                             </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                              <q-input
+                              <q-input dark
                                 v-model="user.country"
                                 type="text"
                                 outlined
@@ -87,7 +119,7 @@
                               </q-input>
                             </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                              <q-input
+                              <q-input dark
                                 v-model="user.city"
                                 type="text"
                                 outlined
@@ -99,29 +131,6 @@
                                 </template>
                               </q-input>
                             </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
-                              v-model="user.birth"
-                              mask="date"
-                              class="mt-1"
-                              type="text"
-                              outlined
-                              label="Дата рождения"
-                              stack-label
-                              :rules="['date']">
-                              <template v-slot:append>
-                                <q-icon name="event" class="cursor-pointer">
-                                  <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                                    <q-date v-model="user.birth">
-                                      <div class="row items-center justify-end">
-                                        <q-btn v-close-popup label="Close" color="primary" flat/>
-                                      </div>
-                                    </q-date>
-                                  </q-popup-proxy>
-                                </q-icon>
-                              </template>
-                            </q-input>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -130,7 +139,7 @@
                     >
                       <q-btn
                         @click="submitProfileForm"
-                        class="bg-primary text-white"
+                        class="bg-primary q-ma-sm text-white"
                       >
                         Обновить информацию
                       </q-btn>
@@ -139,137 +148,66 @@
                       </p>
                     </div>
                   </form>
-                </div>
-              </div>
-            </form>
-          </q-tab-panel>
-
-          <q-tab-panel name="auth-data">
-            <div class="text-h6 text-black">Авторизация</div>
-            <form>
-              <div class="row">
-                <div class="col-12 col-md-12 black-block mt-3">
-                  <form
-                    class="q-pt-xl"
-                    @submit.prevent="submitProfileForm"
-                  >
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row q-pb-md">
-                          <div class="col-12 col-md-6 q-pa-sm">
-                            <q-input
-                              class="mt-1"
-                              id="mail"
-                              type="text"
-                              v-model="user.email"
-                              outlined
-                              disabled
-                              readonly
-                              label="E-Mail"
-                              stack-label
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="mail"/>
-                              </template>
-                            </q-input>
-                          </div>
-                          <div class="col-12 col-md-6 q-pa-sm">
-                            <q-input
-                              class="mt-1"
-                              id="mail"
-                              type="text"
-                              v-model="user.login"
-                              outlined
-                              disabled
-                              readonly
-                              label="Логин"
-                              stack-label
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="person"/>
-                              </template>
-                            </q-input>
-                          </div>
-                        </div>
-                        <div
-                          class="col-12 q-pa-sm"
+                  <form @submit.prevent="submitPasswordForm">
+                    <div class="row q-pb-md q-pt-md">
+                      <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
+                        <q-input dark
+                                 v-model="passwordForm.password"
+                                 class="mt-1"
+                                 id="new-password"
+                                 type="password"
+                                 outlined
+                                 label="Новый пароль"
+                                 stack-label
                         >
-                          <q-btn
-                            @click="submitProfileForm"
-                            class="bg-primary text-white"
-                          >
-                            Обновить Почту
-                          </q-btn>
-                          <p v-if="this.message" class="text-success">
-                            {{ message }}
-                          </p>
-                        </div>
-                        <form @submit.prevent="submitPasswordForm">
-                          <div class="row q-pb-md q-pt-xl">
-                            <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
-                              <q-input
-                                v-model="passwordForm.password"
-                                class="mt-1"
-                                id="new-password"
-                                type="password"
-                                outlined
-                                label="Новый пароль"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="lock"/>
-                                </template>
-                              </q-input>
-                            </div>
-                            <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
-                              <q-input
-                                v-model="passwordForm.passwordConfirmation"
-                                class="mt-1"
-                                id="passwordConfirmation"
-                                type="password"
-                                outlined
-                                label="Подтвердите пароль"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="lock"/>
-                                </template>
-                              </q-input>
-                            </div>
-                            <div
-                              class="col-12 q-pa-sm"
-                            >
-                              <q-btn
-                                @click="submitProfileForm"
-                                class="bg-primary text-white"
-                              >
-                                Обновить пароль
-                              </q-btn>
-                            </div>
-                          </div>
-                        </form>
+                          <template v-slot:prepend>
+                            <q-icon name="lock"/>
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
+                        <q-input dark
+                                 v-model="passwordForm.passwordConfirmation"
+                                 class="mt-1"
+                                 id="passwordConfirmation"
+                                 type="password"
+                                 outlined
+                                 label="Подтвердите пароль"
+                                 stack-label
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="lock"/>
+                          </template>
+                        </q-input>
+                      </div>
+                      <div
+                        class="col-12 q-pa-sm"
+                      >
+                        <q-btn
+                          @click="submitProfileForm"
+                          class="bg-primary text-white"
+                        >
+                          Обновить пароль
+                        </q-btn>
                       </div>
                     </div>
                   </form>
+
                 </div>
               </div>
-            </form>
-
           </q-tab-panel>
-          <q-tab-panel name="requisite">
-            <div class="text-h6 text-black">Ваши Реквизиты</div>
-            <form>
+          <q-tab-panel dark name="requisite">
+<!--            <div class="text-h6 text-white">Ваши Реквизиты</div>-->
               <div class="row">
                 <div class="col-12 col-md-12">
                   <form
-                    class="q-pt-md"
                     @submit.prevent="submitProfileForm"
                   >
                     <div class="row justify-between">
                       <div class="col-12 col-md-9">
                         <div class="row q-pb-md">
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.card"
                               class="mt-1"
                               type="text"
@@ -279,7 +217,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.perfectMoney"
                               class="mt-1"
                               type="text"
@@ -289,7 +227,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.qiwi"
                               type="text"
                               outlined
@@ -298,7 +236,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.advCash"
                               type="text"
                               outlined
@@ -307,7 +245,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.yooMoney"
                               type="text"
                               outlined
@@ -316,7 +254,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.bitcoin"
                               type="text"
                               outlined
@@ -325,7 +263,7 @@
                               />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.bitcoin"
                               type="text"
                               outlined
@@ -334,7 +272,7 @@
                               />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.payeer"
                               type="text"
                               outlined
@@ -343,7 +281,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.liteCoin"
                               type="text"
                               outlined
@@ -352,7 +290,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.dogeCoin"
                               type="text"
                               outlined
@@ -361,7 +299,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.etherium"
                               type="text"
                               outlined
@@ -370,7 +308,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.ripple"
                               type="text"
                               outlined
@@ -379,7 +317,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.erc20"
                               type="text"
                               outlined
@@ -388,7 +326,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.trc20"
                               type="text"
                               outlined
@@ -397,7 +335,7 @@
                             />
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input
+                            <q-input dark
                               v-model="user.paypal"
                               type="text"
                               outlined
@@ -424,13 +362,12 @@
                   </form>
                 </div>
               </div>
-            </form>
           </q-tab-panel>
 
-          <q-tab-panel name="pack">
-            <div class="text-h6 text-black">Платежи</div>
+          <q-tab-panel dark name="pack">
+<!--            <div class="text-h6 text-white">Платежи</div>-->
             <div v-if="payments" class="row">
-              <q-card class="col-12 col-md-6 q-my-md" v-for="(payment, index) in payments" :key="index">
+              <q-card dark class="col-12 col-md-6" v-for="(payment, index) in payments" :key="index">
                 <q-card-section>
                   <div class="text-h6">{{payment.name}}</div>
                   <div class="text-subtitle2">{{payment.sum}}{{payment.currency}}</div>
@@ -440,7 +377,7 @@
                   <div class="text-subtitle2">{{payment.system}}</div>
                 </q-card-section>
                 <q-separator />
-                <q-input color="teal" filled v-model="sum" label="Введите сумму:">
+                <q-input dark color="teal" filled v-model="sum" label="Введите сумму:">
                   <template v-slot:prepend>
                     <q-icon name="monetization_on" />
                   </template>
@@ -524,8 +461,6 @@ export default {
         erc20: '18QAjfijwfe34352552354234jfFj',
         trc20: '18QAjfijwfe34352552354234jfFj',
         paypal: 'vanov1988@gmail.com',
-
-
     }
     // console.log(this.user)
   },

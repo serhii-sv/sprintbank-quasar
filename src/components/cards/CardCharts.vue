@@ -105,9 +105,9 @@ export default {
         "title": {"show": true, "textStyle": {"color": "rgba(0, 0, 0 , .87)", "fontFamily": "sans-serif"}},
         "grid": {"containLabel": true, "left": "0", "bottom": "0", "right": "0"},
         "xAxis": {
-          "show": false,
+          "show": true,
           "type": "category",
-          "axisLine": {"lineStyle": {"color": "rgba(0, 0, 0 , .54)", "type": "dashed"}},
+          "axisLine": {"lineStyle": {"color": "rgba(255, 255, 255 , .54)", "type": "dashed"}},
           "axisTick": {
             "show": true,
             "alignWithLabel": true,

@@ -1,11 +1,12 @@
 <template>
-  <div class="full-width q-pa-sm">
+  <div class="full-width q-pa-sm bg-dark">
     <q-form @submit="submitForm">
       <template v-slot:prepend>
         <q-icon name="place"/>
       </template>
       <div v-show="tab == 'register' || tab == 'edit'">
         <q-input
+          dark
           dense
           v-model="username"
           class="q-mb-md"
@@ -20,6 +21,7 @@
       </div>
       <div v-show="tab == 'register' || tab == 'edit'">
         <q-input
+          dark
           dense
           v-model.trim="email"
           class="q-mb-md"
@@ -28,6 +30,7 @@
           label="Email *"/>
       </div>
       <q-input
+        dark
         dense
         v-model.trim="login"
         class="q-mb-md"
@@ -46,6 +49,7 @@
 
       <div v-show="tab != 'edit'">
         <q-input
+          dark
           dense
           v-model="password"
           class="q-mb-md"
@@ -57,6 +61,7 @@
       </div>
       <div v-show="tab == 'register'">
         <q-input
+          dark
           dense
           v-model="passwordConfirmation"
           class="q-mb-md"
@@ -85,6 +90,7 @@
       </div>
       <div v-show="tab == 'edit'">
         <q-input
+          dark
           dense
           v-model="phone"
           class="q-mb-md"

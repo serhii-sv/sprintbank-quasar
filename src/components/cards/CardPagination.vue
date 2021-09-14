@@ -5,14 +5,14 @@
         <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
 <!--          <div class="text-h6 float-left q-ml-md q-mt-sm">Pagination With Filters</div>-->
           <q-space/>
-          <q-select dense outlined style="min-width: 200px" v-model="type" :options="['Все','Категория1','Категория2']"
+          <q-select dark dense outlined style="min-width: 200px" v-model="type" :options="['Все','Категория1','Категория2']"
                     class="float-right" label="Категория"/>
         </div>
       </q-card-section>
       <q-card-section class="q-mx-sm">
         <div class="row q-col-gutter-lg">
           <div class="col-lg-3 col-sm-12 col-xs-12 col-md-3" v-for="(data, index) in getData2" :key="index">
-            <q-card style="background-color: #292845" class="text-white">
+            <q-card class="text-white bg-black">
               <q-img :src="data.img">
                 <template v-slot:loading>
                   <div class="text-subtitle1 text-white">
@@ -21,7 +21,7 @@
                 </template>
               </q-img>
               <q-separator></q-separator>
-              <q-card-section class="text-h5 text-center">{{data.title}}</q-card-section>
+              <q-card-section class="text-h5">{{data.title}}</q-card-section>
               <q-card-section class="text-justify">
                 <div>{{data.text}}</div>
               </q-card-section>
@@ -36,7 +36,7 @@
 
                 <q-space/>
 
-                <q-btn color icon="chat_bubble" class="bg-transparent" flat label="56"/>
+                <q-btn icon="chat_bubble" class="bg-transparent" flat label="56"/>
               </q-card-actions>
 
             </q-card>
