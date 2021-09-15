@@ -1,5 +1,6 @@
 <template>
   <q-table
+    dark
     class="my-sticky-header-column-table"
     title="Мои рефералы"
     :rows="rows"

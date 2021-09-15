@@ -45,26 +45,9 @@
                               </template>
                             </q-input>
                           </div>
-                          <div class="col-12 col-md-6 q-pa-sm">
-                            <q-input dark
-                                     class="mt-1"
-                                     id="mail"
-                                     type="text"
-                                     v-model="user.login"
-                                     outlined
-                                     disabled
-                                     readonly
-                                     label="Логин"
-                                     stack-label
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="person"/>
-                              </template>
-                            </q-input>
-                          </div>
                           <div class="col-12 col-md-4 q-pa-sm">
                             <q-input dark
-                              v-model="user.username"
+                              v-model="user.name"
                               class="mt-1"
                               type="text"
                               outlined
@@ -77,9 +60,11 @@
                             </q-input>
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
+                            {{$t('male')}}
                               <q-select
                                 dark
-                                v-model="user.gender"
+                                v-model="user.sex"
+                                :model-value="user.sex"
                                 :options="options"
                                 type="text"
                                 outlined
@@ -105,32 +90,32 @@
                                 </template>
                               </q-input>
                             </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                              <q-input dark
-                                v-model="user.country"
-                                type="text"
-                                outlined
-                                label="Страна"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="place"/>
-                                </template>
-                              </q-input>
-                            </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                              <q-input dark
-                                v-model="user.city"
-                                type="text"
-                                outlined
-                                label="Город"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="place"/>
-                                </template>
-                              </q-input>
-                            </div>
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                              <q-input dark-->
+<!--                                v-model="user.country"-->
+<!--                                type="text"-->
+<!--                                outlined-->
+<!--                                label="Страна"-->
+<!--                                stack-label-->
+<!--                              >-->
+<!--                                <template v-slot:prepend>-->
+<!--                                  <q-icon name="place"/>-->
+<!--                                </template>-->
+<!--                              </q-input>-->
+<!--                            </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                              <q-input dark-->
+<!--                                v-model="user.city"-->
+<!--                                type="text"-->
+<!--                                outlined-->
+<!--                                label="Город"-->
+<!--                                stack-label-->
+<!--                              >-->
+<!--                                <template v-slot:prepend>-->
+<!--                                  <q-icon name="place"/>-->
+<!--                                </template>-->
+<!--                              </q-input>-->
+<!--                            </div>-->
                         </div>
                       </div>
                     </div>
@@ -426,7 +411,7 @@ export default {
       user: null,
       errors: null,
       successRegistration: false,
-      options: ['Мужской', 'Женский'],
+      options: ['male', 'female'],
       message: null,
       passwordForm: {
         password: null,
@@ -437,31 +422,29 @@ export default {
     };
   },
   mounted() {
-    // this.user = {...store.state.user}
-    this.user = {
-        username: 'Иванов Иван Александрович',
-        phone: '+7 984 384 4224',
-        gender: 'Мужской',
-        email: 'ivanov1988@gmail.com',
-        login: 'ivanov_1988',
-        birth: '1988/09/07',
-        country: 'Россия',
-        city: 'Москва',
-        card: '1234 1234 1234 1234',
-        perfectMoney: 'U12345768',
-        advCash: 'vanov1988@gmail.com',
-        qiwi: '+7 984 384 4224',
-        yooMoney: '410123123123',
-        bitcoin: '18QAjfijwfe34352552354234jfFj',
-        payeer: '18QAjfijwfe34352552354234jfFj',
-        liteCoin: '18QAjfijwfe34352552354234jfFj',
-        dogeCoin: '18QAjfijwfe34352552354234jfFj',
-        etherium: '18QAjfijwfe34352552354234jfFj',
-        ripple: '18QAjfijwfe34352552354234jfFj',
-        erc20: '18QAjfijwfe34352552354234jfFj',
-        trc20: '18QAjfijwfe34352552354234jfFj',
-        paypal: 'vanov1988@gmail.com',
-    }
+    this.user = {...store.state.user}
+    // this.user = {
+    //     name: 'Иванов Иван Александрович',
+    //     phone: '+7 984 384 4224',
+    //     sex: 'Мужской',
+    //     email: 'ivanov1988@gmail.com',
+    //     country: 'Россия',
+    //     city: 'Москва',
+    //     card: '1234 1234 1234 1234',
+    //     perfectMoney: 'U12345768',
+    //     advCash: 'vanov1988@gmail.com',
+    //     qiwi: '+7 984 384 4224',
+    //     yooMoney: '410123123123',
+    //     bitcoin: '18QAjfijwfe34352552354234jfFj',
+    //     payeer: '18QAjfijwfe34352552354234jfFj',
+    //     liteCoin: '18QAjfijwfe34352552354234jfFj',
+    //     dogeCoin: '18QAjfijwfe34352552354234jfFj',
+    //     etherium: '18QAjfijwfe34352552354234jfFj',
+    //     ripple: '18QAjfijwfe34352552354234jfFj',
+    //     erc20: '18QAjfijwfe34352552354234jfFj',
+    //     trc20: '18QAjfijwfe34352552354234jfFj',
+    //     paypal: 'vanov1988@gmail.com',
+    // }
     // console.log(this.user)
   },
   methods: {
@@ -489,16 +472,14 @@ export default {
       // }
 
       const profile = {
-        username: this.username,
-        family: this.lastname,
-        lastname: this.lastname,
-        avatar: this.avatar,
-        phone: this.phone,
-        gender: this.gender,
-        birth: this.birth,
+        name: this.user.name,
+        email: this.user.email,
+        phone: this.user.phone,
+        sex: this.user.sex,
       };
       this.message = null;
-      store.actions.Update('users',profile)
+      console.log(profile)
+      store.actions.Update(profile)
         .then(() => {
           this.$emit("updatedForm");
           this.message = "Профиль успешно обновлен";

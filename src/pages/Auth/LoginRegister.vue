@@ -1,52 +1,38 @@
 <template>
   <div class="full-width q-pa-sm bg-dark">
     <q-form @submit="submitForm">
-      <template v-slot:prepend>
-        <q-icon name="place"/>
-      </template>
-      <div v-show="tab == 'register' || tab == 'edit'">
-        <q-input
-          dark
-          dense
-          v-model="username"
-          class="q-mb-md"
-          label="ФИО *"
-        />
-        <!--        <p v-show="$v.username.$dirty && !$v.username.required" class="text-red">-->
-        <!--          Имя пользователя обязательное поле-->
-        <!--        </p>-->
-        <!--        <p v-show="availableUsername === false" class="text-red">-->
-        <!--          Имя пользователя уже используется-->
-        <!--        </p>-->
-      </div>
-      <div v-show="tab == 'register' || tab == 'edit'">
-        <q-input
-          dark
-          dense
-          v-model.trim="email"
-          class="q-mb-md"
-          type="email"
-          placeholder="ivanpetrov@gmail.com"
-          label="Email *"/>
-      </div>
       <q-input
         dark
         dense
-        v-model.trim="login"
+        v-model.trim="email"
         class="q-mb-md"
-        type="login"
-        placeholder="ivanpetrov123"
-        label="Логин *"/>
-      <!--      <p v-show="!$v.email.email" class="text-red">-->
-      <!--        Введите реальный E-mail-->
-      <!--      </p>-->
-      <!--      <p v-show="$v.email.$dirty && !$v.email.required" class="text-red">-->
-      <!--        E-mail обязателен к заполнению-->
-      <!--      </p>-->
-      <!--      <p v-show="availableEmail === false" class="text-red">-->
-      <!--        Email уже используется-->
-      <!--      </p>-->
-
+        type="email"
+        placeholder="ivanpetrov@gmail.com"
+        label="Email *"/>
+      <div v-show="tab != 'login'">
+        <q-input
+          dark
+          dense
+          v-model="name"
+          class="q-mb-md"
+          label="ФИО *"
+        />
+        <q-input
+          dark
+          dense
+          v-model="phone"
+          class="q-mb-md"
+          label="Телефон *"/>
+        <q-select
+          dark
+          dense
+          v-model="sex"
+          :options="options"
+          type="text"
+          label="Пол"
+          stack-label
+        />
+      </div>
       <div v-show="tab != 'edit'">
         <q-input
           dark
@@ -88,14 +74,6 @@
         <!--          unchecked-icon="clear"-->
         <!--        />-->
       </div>
-      <div v-show="tab == 'edit'">
-        <q-input
-          dark
-          dense
-          v-model="phone"
-          class="q-mb-md"
-          label="Телефон *"/>
-      </div>
       <p class="text-red" v-if="error">{{ error }}</p>
       <div v-if="tab == 'login'">
         <q-btn class="no-margin no-padding" to="reset" flat>Забыли пароль?</q-btn>
@@ -134,15 +112,16 @@ export default {
   data() {
     return {
       role: 'user',
-      login: this.login ? this.user.login : null,
-      email: this.user ? this.user.email : null,
-      username: this.user ? this.user.username : null,
+      email: this.user ? this.user.email : 'ivanov1990@gmail.com',
+      name: this.user ? this.user.name : null,
       phone: this.user ? this.user.phone : null,
       error: null,
+      sex: null,
+      options: ['male', 'female'],
       avatar: this.user ? this.user.avatar : null,
-      password: null,
+      password: '123123123',
       passwordConfirmation: null,
-      availableUsername: null,
+      availablename: null,
       availableEmail: null,
       file: null,
     }
@@ -183,13 +162,20 @@ export default {
     },
     submitForm() {
       const user = {
-        username: this.username,
         email: this.email,
         password: this.password,
+        password_confirmation: this.passwordConfirmation,
+        name: this.name,
         phone: this.phone,
-        avatar: this.avatar,
-        role: this.role,
+        sex: this.sex,
       };
+
+      // const user = {
+      //   "email": "user123@mail.com",
+      //   "password": "PassWord12345",
+      //   "password_confirmation": "PassWord12345",
+      //   "name": "John Doe"
+      // }
       // this.$v.$touch();
       // if (this.$v.$invalid) {
       //   return;

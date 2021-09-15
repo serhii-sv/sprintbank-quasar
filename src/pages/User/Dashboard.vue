@@ -1,7 +1,7 @@
 <template>
   <div class="q-pt-md">
-    <div class="q-px-md">
-      <p class="text-h6 text-weight-light">Здравствуй Иван!</p>
+    <div v-if="store.getters.getUser()" class="q-px-md">
+      <p class="text-h6 text-weight-light">Здравствуй {{store.getters.getUser()?.name}}!</p>
       <p class="text-h5">Ненастное утро может смениться ясным днём.</p>
     </div>
 <!--    <card-social icon_position="right" />-->
@@ -18,7 +18,7 @@
           </q-item-section>
         </q-item>
       </q-card-section>
-      <q-card-section class="row bg-dark">
+      <q-card-section class="row bg-dark no-padding">
         <div class="col-lg-7 col-sm-12 col-xs-12 col-md-7">
               <q-item>
                 <q-item-section top avatar>
@@ -46,21 +46,25 @@
               <q-item-label class="text-grey-7 text-bold text-right" caption>+ 1,33%</q-item-label>
             </q-item-section>
           </q-item>
-          <div class="q-py-md">
+        </div>
+      </q-card-section>
+      <q-card-section>
+
+      <Transactions :count="-5"/>
+        <div class="q-py-md">
             <vue-echarts style="height: 250px" :option="getSalesOptions" :resizable="true" />
           </div>
-        </div>
         <div class="col-lg-5 col-sm-12 col-xs-12 col-md-5">
           <q-item>
             <q-item-section avatar class="">
-              <q-icon color="blue" name="fas fa-gift" class="q-pl-md" size="24px" />
+              <q-icon color="blue" name="fas fa-chart-line" class="q-pl-md" size="24px" />
             </q-item-section>
 
             <q-item-section>
-              <div class="text-h6">Продажи сегодня</div>
+              <div class="text-h6">График прибыли</div>
             </q-item-section>
           </q-item>
-          <div>
+          <div class="bg-black">
             <vue-echarts style="height: 250px" :option="getPieOptions" :resizable="true" />
           </div>
         </div>
@@ -314,159 +318,24 @@
 import {VueEcharts} from "vue3-echarts";
 import CardSocial from "components/cards/CardSocial";
 import CardCharts from "components/cards/CardCharts";
+import store from "src/myStore";
+import Transactions from "pages/User/Transactions";
 
 export default {
   name: "Dashboard",
   components: {
+    Transactions,
     CardCharts,
-    VueEcharts,
-    // CardSocial
+    VueEcharts
+  },
+  mounted() {
+    !store.getters.isAuthenticated()?this.$router.push('/auth'): null
   },
   data() {
     return {
       slide: 1,
-      tab: "contact",
-      messages: [
-        {
-          id: 5,
-          name: "Pratik Patel",
-          msg: " -- I'll be in your neighborhood doing errands this\n" + "            weekend. Do you want to grab brunch?",
-          avatar: "https://avatars2.githubusercontent.com/u/34883558?s=400&v=4",
-          time: "10:42 PM"
-        },
-        {
-          id: 6,
-          name: "Winfield Stapforth",
-          msg: " -- I'll be in your neighborhood doing errands this\n" + "            weekend. Do you want to grab brunch?",
-          avatar: "https://cdn.quasar.dev/img/avatar6.jpg",
-          time: "11:17 AM"
-        },
-        {
-          id: 1,
-          name: "Boy",
-          msg: " -- I'll be in your neighborhood doing errands this\n" + "            weekend. Do you want to grab brunch?",
-          avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
-          time: "5:17 AM"
-        },
-        {
-          id: 2,
-          name: "Jeff Galbraith",
-          msg: " -- I'll be in your neighborhood doing errands this\n" + "            weekend. Do you want to grab brunch?",
-          avatar: "https://cdn.quasar.dev/team/jeff_galbraith.jpg",
-          time: "5:17 AM"
-        },
-        {
-          id: 3,
-          name: "Razvan Stoenescu",
-          msg: " -- I'll be in your neighborhood doing errands this\n" + "            weekend. Do you want to grab brunch?",
-          avatar: "https://cdn.quasar.dev/team/razvan_stoenescu.jpeg",
-          time: "5:17 AM"
-        }
-      ],
-      contacts: [
-        {
-          name: "Pratik Patel",
-          position: "Developer",
-          avatar: "https://avatars2.githubusercontent.com/u/34883558?s=400&v=4"
-        },
-        {
-          name: "Razvan Stoenescu",
-          position: "Developer",
-          avatar: "https://cdn.quasar.dev/team/razvan_stoenescu.jpeg"
-        },
-        {
-          name: "Jeff Galbraith",
-          position: "Developer",
-          avatar: "https://cdn.quasar.dev/team/jeff_galbraith.jpg"
-        },
-        {
-          name: "Brunhilde Panswick",
-          position: "Administrator",
-          avatar: "https://cdn.quasar.dev/img/avatar2.jpg"
-        },
-        {
-          name: "Winfield Stapforth",
-          position: "Administrator",
-          avatar: "https://cdn.quasar.dev/img/avatar6.jpg"
-        }
-      ],
-      sales_data: [
-        {
-          name: "Pratik Patel",
-          Progress: 70,
-          status: "Canceled",
-          stock: "14 / 30",
-          date: "23 Oct 2018",
-          avatar: "https://avatars3.githubusercontent.com/u/34883558?s=400&u=09455019882ac53dc69b23df570629fd84d37dd1&v=4",
-          product_name: "Woman Bag",
-          total: "$300,00",
-          code: "QWE123",
-          prod_img: require("src/assets/bag.jpg")
-        },
-        {
-          name: "Mayank Patel",
-          Progress: 60,
-          status: "Sent",
-          date: "11 Nov 2018",
-          stock: "25 / 70",
-          avatar: "https://avatars2.githubusercontent.com/u/27857088?s=400&u=a898efbc753d93cf4c2070a7cf3b05544b50deea&v=4",
-          product_name: "Laptop",
-          total: "$230,00",
-          code: "ABC890",
-          prod_img: require("src/assets/laptop.jpg")
-        },
-        {
-          name: "Mayur Patel",
-          Progress: 30,
-          status: "Pending",
-          stock: "35 / 50",
-          avatar: "https://avatars0.githubusercontent.com/u/55240045?s=400&u=cf9bffc2bd2d8e42ca6e5abf40ddd6c1a03ce2860&v=4",
-          product_name: "Pinapple Jam",
-          total: "$34,00",
-          date: "19 Sept 2020",
-          code: "GHI556",
-          prod_img: require("src/assets/jam.jpg")
-        },
-        {
-          name: "Jeff Galbraith",
-          Progress: 100,
-          status: "Paid",
-          stock: "18 / 33",
-          avatar: "https://avatars1.githubusercontent.com/u/10262924?s=400&u=9f601b344d597ed76581e3a6a10f3c149cb5f6dc&v=4",
-          product_name: "Action Figure",
-          total: "$208,00",
-          date: "19 Sept 2020",
-          code: "JKL345",
-          prod_img: require("src/assets/action.jpg")
-        }
-      ],
-      sales_column: [
-        {
-          name: "Products",
-          label: "Products",
-          field: "Products",
-          sortable: true,
-          align: "left"
-        },
-        { name: "Name", label: "Buyer", field: "name", sortable: true, align: "left" },
-        {
-          name: "Total",
-          label: "Total",
-          field: "total",
-          sortable: true,
-          align: "right",
-          classes: "text-bold"
-        },
-        {
-          name: "Status",
-          label: "Status",
-          field: "status",
-          sortable: true,
-          align: "left",
-          classes: "text-bold"
-        },
-        { name: "Stock", label: "Stock", field: "task", sortable: true, align: "left" }
-      ]
+      store: store,
+      tab: "contact"
     };
   },
   computed: {
@@ -502,25 +371,25 @@ export default {
         ],
         series: [
           {
-            name: "Fashions",
+            name: "Bitcoin",
             type: "bar",
             data: [40, 45, 27, 50, 32, 50, 70, 30, 30, 40, 67, 29],
             color: "#546bfa"
           },
           {
-            name: "Electronics",
+            name: "Ethereum",
             type: "bar",
             data: [124, 100, 20, 120, 117, 70, 110, 90, 50, 90, 20, 50],
             color: "#3a9688"
           },
           {
-            name: "Toys",
+            name: "Litecoin",
             type: "bar",
             data: [17, 2, 0, 29, 20, 10, 23, 0, 8, 20, 11, 30],
             color: "#02a9f4"
           },
           {
-            name: "Vouchers",
+            name: "Ripple",
             type: "bar",
             data: [20, 100, 80, 14, 90, 86, 100, 70, 120, 50, 30, 60],
             color: "#f88c2b"
@@ -535,9 +404,10 @@ export default {
           formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         legend: {
+          color: '#fff',
           bottom: 10,
           left: "center",
-          data: ["Fashions", "Electronics", "Toys", "Vouchers"]
+          data: ["Bitcoin", "Ethereum", "Litecoin", "Ripple"]
         },
         series: [
           {
@@ -546,12 +416,12 @@ export default {
             radius: ["50%", "70%"],
             avoidLabelOverlap: false,
             label: {
-              show: false,
+              show: true,
               position: "center"
             },
             emphasis: {
               label: {
-                show: false,
+                show: true,
                 fontSize: "30",
                 fontWeight: "bold"
               }
@@ -562,28 +432,28 @@ export default {
             data: [
               {
                 value: 335,
-                name: "Fashions",
+                name: "Bitcoin",
                 itemStyle: {
                   color: "#546bfa"
                 }
               },
               {
                 value: 310,
-                name: "Electronics",
+                name: "Ethereum",
                 itemStyle: {
                   color: "#3a9688"
                 }
               },
               {
                 value: 234,
-                name: "Toys",
+                name: "Litecoin",
                 itemStyle: {
                   color: "#02a9f4"
                 }
               },
               {
                 value: 135,
-                name: "Vouchers",
+                name: "Ripple",
                 itemStyle: {
                   color: "#f88c2b"
                 }

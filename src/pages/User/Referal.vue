@@ -1,11 +1,12 @@
 <template>
   <q-table
+    dark
     class="my-sticky-header-column-table"
     title="Реферальная система"
     :rows="rows"
     :columns="columns"
     row-key="name"
-    rows-per-page="20"
+    :rows-per-page-options="[0]"
   />
 </template>
 

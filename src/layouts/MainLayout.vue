@@ -8,10 +8,10 @@
             <!--              <div class="column">-->
             <!--                <div class="text-h6 q-mb-md">Настройки</div>-->
             <q-list dark class="column text-left">
-              <q-btn class="font-12" flat to="/statistics" label="Статистика"/>
-              <q-btn class="font-12" flat to="/news" label="Новости"/>
+              <q-btn v-if="store.getters.isAuthenticated()" class="font-12" flat to="/statistics" label="Статистика"/>
+              <q-btn v-if="store.getters.isAuthenticated()" class="font-12" flat to="/news" label="Новости"/>
               <q-separator/>
-              <q-btn flat label="Аккаунт">
+              <q-btn v-if="store.getters.isAuthenticated()" flat label="Аккаунт">
                 <q-menu class="bg-dark" dark>
                   <div class="row no-wrap q-pa-sm">
                     <!--              <div class="column">-->
@@ -19,13 +19,13 @@
                     <q-list class="bg-dark" dark>
                       <q-item dark dense clickable class="text-white bg-dark" to="/profile">Профиль</q-item>
                       <q-separator/>
-                      <q-item dark dense clickable class="text-white bg-dark" to="/dashboard">Dashboard</q-item>
+                      <q-item dark dense clickable class="text-white bg-dark" to="/">Dashboard</q-item>
                       <q-separator/>
                       <q-item dark dense clickable class="text-white bg-dark" to="/transactions">Транзакции</q-item>
                       <q-separator/>
                       <q-item dark dense clickable class="text-white bg-dark" to="/referal">Реферальная система</q-item>
                       <q-separator/>
-                      <q-item dark dense clickable class="text-white bg-dark" to="/profile">Выход</q-item>
+                      <q-item @click="store.actions.authLogout()" dark dense clickable class="text-white bg-dark">Выход</q-item>
                     </q-list>
                     <!--              </div>-->
 
@@ -50,12 +50,12 @@
                 </q-menu>
               </q-btn>
               <q-separator/>
-              <q-btn class="font-12" flat to="/auth" label="Авторизация"/>
+              <q-btn v-if="!store.getters.isAuthenticated()" class="font-12" flat to="/auth" label="Авторизация"/>
             </q-list>
             <!--            </div>-->
           </q-menu>
         </q-btn>
-          <router-link to="/dashboard">
+          <router-link to="/">
             <h1>
               <b>Sprint</b><span>Bank</span>
             </h1>
@@ -72,8 +72,14 @@
 <script>
 
 import { defineComponent } from 'vue'
+import store from 'src/myStore';
 
 export default defineComponent({
   name: 'MainLayout',
+  data(){
+    return{
+      store: store
+    }
+  }
 })
 </script>

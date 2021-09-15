@@ -4,8 +4,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import {useI18n} from "vue-i18n";
 
-const api = null
-// const api = process.env.API_URL
+const api = process.env.API_URL
 // if (!process.env.SERVER) {
   axios.defaults.headers.common["Authorization"] = localStorage.getItem(
     "access_token")
@@ -66,12 +65,14 @@ const actions = {
         return {error};
       });
   },
-  GetById: (service, id) => {
+  GetUserData: () => {
     return axios
-      .get(`${api}/${service}/get/` + id)
+      .get(`${api}/user`)
       .then(response => {
         if (response.data) {
-          return response.data;
+          store.state.user = response.data.data;
+          localStorage.setItem("user", JSON.stringify(response.data.data));
+          return response.data
         }
         return false;
       })
@@ -93,13 +94,12 @@ const actions = {
         return {error};
       });
   },
-  Update: (service, body) => {
-    // let section = this.state[service].filter(el => el._id === body._id)
-    const ids = service==='users'?jwt_decode(localStorage.getItem("access_token")).sub : body.id
+  Update:  body => {
     return axios
-      .put(`${api}/${service}/put/` + ids, body)
+      .put(`${api}/user/`, body)
       .then(response => {
         if (response.data) {
+          store.actions.GetUserData()
           return response.data;
         }
         return false;
@@ -113,7 +113,7 @@ const actions = {
   },
   // Author
   authRequest: payload => {
-    let actionUrl = api + "/users/authenticate";
+    let actionUrl = api + "/login";
     let data = {
       email: payload.email,
       password: payload.password
@@ -122,7 +122,7 @@ const actions = {
       axios
         .post(actionUrl, data)
         .then(resp => {
-          let access_token = "Bearer " + resp.data.token;
+          let access_token = "Bearer " + resp.data.api_token;
           state.access_token = access_token;
           state.user = JSON.stringify(resp.data);
           localStorage.setItem("access_token", access_token);
@@ -168,10 +168,10 @@ const actions = {
   authRegister: payload => {
     return new Promise((resolve, reject) => {
       axios
-        .post(api + "/users/register", payload)
+        .post(api + "/register", payload)
         .then(response => {
             if (response.data) {
-              let actionUrl = api + "/users/authenticate";
+              let actionUrl = api + "/login";
               let data = {
                 email: payload.email,
                 password: payload.password
@@ -180,7 +180,7 @@ const actions = {
                 axios
                   .post(actionUrl, data)
                   .then(resp => {
-                    let access_token = "Bearer " + resp.data.token;
+                    let access_token = "Bearer " + resp.data.api_token;
                     localStorage.setItem("access_token", access_token);
                     localStorage.setItem("user", JSON.stringify(resp.data));
                     axios.defaults.headers.common["Authorization"] = access_token;
@@ -276,6 +276,7 @@ const actions = {
 const getters = {
   isAuthenticated: () => !!state.access_token,
   isAdmin: () => state.user?.role === 'admin',
+  getUser: () => state.user,
 }
 const store = {
   state,
