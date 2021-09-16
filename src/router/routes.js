@@ -54,6 +54,12 @@ const routes = [
         component: () => import("pages/User/Transactions.vue")
       },
       {
+        name: "deposits",
+        path: "deposits",
+        beforeEnter: ifNotAuthenticated,
+        component: () => import("pages/User/Deposits.vue")
+      },
+      {
         name: "referal",
         path: "referal",
         beforeEnter: ifNotAuthenticated,

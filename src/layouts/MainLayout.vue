@@ -66,6 +66,9 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-footer class="bg-black-t text-primary roundedUp">
+      <AppNav/>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -73,9 +76,11 @@
 
 import { defineComponent } from 'vue'
 import store from 'src/myStore';
+import AppNav from "components/AppNav";
 
 export default defineComponent({
   name: 'MainLayout',
+  components: {AppNav},
   data(){
     return{
       store: store

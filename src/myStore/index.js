@@ -13,41 +13,32 @@ const state = reactive({
 
   navItems: [
     {
-      root: '/home',
-      to: '/home',
-      icon: 'las la-home',
-      label: 'Home'
+      root: '/',
+      to: '/',
+      icon: 'fas fa-chart-line',
+      label: 'Статистика'
     },
     {
-      root: '/courses',
-      to: '/courses',
-      icon: 'las la-image',
-      label: 'Courses'
+      root: '/deposits',
+      to: '/deposits',
+      icon: 'fas fa-wallet',
+      label: 'Депозиты'
     },
     {
-      root: '/authors',
-      to: '/authors',
-      icon: 'las la-image',
-      label: 'Authors'
-    },
-    // {
-    //   root: '/settings',
-    //   to: '/settings',
-    //   icon: 'settings',
-    //   label: 'Settings'
-    // }
+      root: '/transactions',
+      to: '/transactions',
+      icon: 'fas fa-exchange-alt',
+      label: 'Транзакции'
+    }
   ],
+  transactions: null,
+  deposits: null,
   access_token: localStorage.getItem('access_token'),
   user: JSON.parse(localStorage.getItem('user')),
   usePageTransition: false,
   iosBrowserSwipingBack: false
 })
 const actions = {
-  setIt:(service, data) =>{
-    this.state[service] = this[service].filter(el => el._id === data._id)
-    // console.log(this[service].filter(el => el._id === data._id))
-  },
-// Common Services
   GetAll: (service) => {
     return axios
       .get(`${api}/${service}`)
@@ -57,6 +48,34 @@ const actions = {
           state[service] = response.data
           // console.log(response.data)
           // }
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetTransactions: () => {
+    return axios
+      .get(`${api}/transactions`)
+      .then(response => {
+        if (response.data) {
+          state.transactions = response.data
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetDeposits: () => {
+    return axios
+      .get(`${api}/deposits`)
+      .then(response => {
+        if (response.data) {
+          state.deposits = response.data
           return response.data;
         }
         return false;
@@ -80,20 +99,6 @@ const actions = {
         return {error};
       });
   },
-  Add: (service, body) => {
-    const userId = jwt_decode(localStorage.getItem("access_token")).sub;
-    return axios
-      .post(`${api}/${service}/add/`, !body ? {owner: userId, name: 'default'} : body)
-      .then(response => {
-        if (response.data) {
-          return response.data;
-        }
-        return false;
-      })
-      .catch(error => {
-        return {error};
-      });
-  },
   Update:  body => {
     return axios
       .put(`${api}/user/`, body)
@@ -108,8 +113,8 @@ const actions = {
         return {error};
       });
   },
-  Delete: (service, id) => {
-    return axios.delete(`${api}/${service}/` + id);
+  DeleteUser: () => {
+    return axios.delete(`${api}/user`)
   },
   // Author
   authRequest: payload => {
@@ -137,23 +142,6 @@ const actions = {
           reject(err);
         });
     });
-  },
-  async GetUserInfo() {
-    await axios
-      .get(`${api}/users/current`)
-      .then(response => {
-          return response;
-      })
-      .catch(err => {
-        if (
-          err.response &&
-          err.response.status &&
-          err.response.status === 401 &&
-          err.config &&
-          !err.config.__isRetryRequest
-        )
-          throw err;
-      });
   },
   UpdatePassword: password => {
     const userId = jwt_decode(localStorage.getItem("access_token")).sub;
