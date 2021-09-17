@@ -1,0 +1,7 @@
+{
+  "appId": "quasar.sprint.bank.app",
+  "appName": "Sprint Bank",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

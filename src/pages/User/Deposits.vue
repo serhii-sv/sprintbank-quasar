@@ -25,24 +25,23 @@ export default {
     return {
       store: store,
       columns: [
-
         {
           name: "Balance",
           label: "Баланс",
-          field: row => Math.round(row.balance),
+          field: row => Math.round(row.balance) + row.currency.code,
           format: val => `${val}`,
           sortable: true,
           align: "left"
         },
-        {
-          name: "Currency",
-          label: "Валюта",
-          field: row => row.currency.name,
-          format: val => `${val}`,
-          sortable: true,
-          align: "left",
-          classes: "text-bold"
-        },
+        // {
+        //   name: "Currency",
+        //   label: "Валюта",
+        //   field: row => row.currency.name,
+        //   format: val => `${val}`,
+        //   sortable: true,
+        //   align: "left",
+        //   classes: "text-bold"
+        // },
         {
           name: "DateOpen",
           label: "Дата Открытия",

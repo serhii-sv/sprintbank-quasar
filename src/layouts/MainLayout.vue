@@ -81,6 +81,9 @@ import AppNav from "components/AppNav";
 export default defineComponent({
   name: 'MainLayout',
   components: {AppNav},
+  mounted() {
+    !store.getters.isAuthenticated()?this.$router.push('/auth'): null
+  },
   data(){
     return{
       store: store

@@ -39,20 +39,9 @@
   import LoginRegister from "./LoginRegister";
 
   export default {
-    props: ['hide'],
     data() {
       return {
         tab: 'login'
-      }
-    },
-    computed: {
-      // tabs: function(){
-      //   return this.tab;
-      // }
-    },
-    methods: {
-      close() {
-        this.$emit('hide');
       }
     },
     components: {LoginRegister}

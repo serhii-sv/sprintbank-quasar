@@ -33,21 +33,19 @@ const state = reactive({
   ],
   transactions: null,
   deposits: null,
+  wallets: null,
   access_token: localStorage.getItem('access_token'),
   user: JSON.parse(localStorage.getItem('user')),
   usePageTransition: false,
   iosBrowserSwipingBack: false
 })
 const actions = {
-  GetAll: (service) => {
-    return axios
-      .get(`${api}/${service}`)
+  async GetTransactions() {
+    return await axios
+      .get(`${api}/transactions`)
       .then(response => {
         if (response.data) {
-          // if (service === 'users'){
-          state[service] = response.data
-          // console.log(response.data)
-          // }
+          state.transactions = response.data
           return response.data;
         }
         return false;
@@ -56,12 +54,12 @@ const actions = {
         return {error};
       });
   },
-  GetTransactions: () => {
+  GetWallets: () => {
     return axios
-      .get(`${api}/transactions`)
+      .get(`${api}/wallets`)
       .then(response => {
         if (response.data) {
-          state.transactions = response.data
+          state.wallets = response.data
           return response.data;
         }
         return false;
@@ -116,31 +114,28 @@ const actions = {
   DeleteUser: () => {
     return axios.delete(`${api}/user`)
   },
-  // Author
-  authRequest: payload => {
+  async authRequest(payload)  {
     let actionUrl = api + "/login";
     let data = {
       email: payload.email,
       password: payload.password
     };
-    return new Promise((resolve, reject) => {
-      axios
+     await axios
         .post(actionUrl, data)
         .then(resp => {
           let access_token = "Bearer " + resp.data.api_token;
           state.access_token = access_token;
-          state.user = JSON.stringify(resp.data);
+          state.user = resp.data;
           localStorage.setItem("access_token", access_token);
           localStorage.setItem("user", JSON.stringify(resp.data));
           axios.defaults.headers.common["Authorization"] = access_token;
-          resolve(access_token);
+          return access_token;
         })
         .catch(err => {
           console.log(err);
           localStorage.removeItem("access_token");
           localStorage.removeItem("user");
-          reject(err);
-        });
+          return err;
     });
   },
   UpdatePassword: password => {

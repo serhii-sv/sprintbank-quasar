@@ -190,144 +190,144 @@
                   >
                     <div class="row justify-between">
                       <div class="col-12 col-md-9">
-                        <div class="row q-pb-md">
-                          <div class="col-12 col-md-4 q-pa-sm">
+                        <div v-if="wallets" class="row q-pb-md">
+                          <div v-for="(wallet, index) in wallets" :key="index" class="col-12 col-md-4 q-pa-sm">
                             <q-input dark
-                              v-model="user.card"
+                              v-model="wallet.external"
                               class="mt-1"
                               type="text"
                               outlined
-                              label="Visa/Mastercard"
+                              :label="wallet.currency?.name"
                               stack-label
                             />
                           </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.perfectMoney"
-                              class="mt-1"
-                              type="text"
-                              outlined
-                              label="Visa/Mastercard"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.qiwi"
-                              type="text"
-                              outlined
-                              label="Qiwi"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.advCash"
-                              type="text"
-                              outlined
-                              label="Adv Cash"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.yooMoney"
-                              type="text"
-                              outlined
-                              label="YooMoney"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.bitcoin"
-                              type="text"
-                              outlined
-                              label="BitCoin"
-                              stack-label
-                              />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.bitcoin"
-                              type="text"
-                              outlined
-                              label="BitCoin"
-                              stack-label
-                              />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.payeer"
-                              type="text"
-                              outlined
-                              label="Payeer"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.liteCoin"
-                              type="text"
-                              outlined
-                              label="LiteCoin"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.dogeCoin"
-                              type="text"
-                              outlined
-                              label="DogeCon"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.etherium"
-                              type="text"
-                              outlined
-                              label="Etherium"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.ripple"
-                              type="text"
-                              outlined
-                              label="Ripple"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.erc20"
-                              type="text"
-                              outlined
-                              label="TetherUsd ERC20"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.trc20"
-                              type="text"
-                              outlined
-                              label="TetherUsd TRC20"
-                              stack-label
-                            />
-                          </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.paypal"
-                              type="text"
-                              outlined
-                              label="PayPal"
-                              stack-label
-                            />
-                          </div>
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.perfectMoney"-->
+<!--                              class="mt-1"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="Visa/Mastercard"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.qiwi"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="Qiwi"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.advCash"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="Adv Cash"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.yooMoney"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="YooMoney"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.bitcoin"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="BitCoin"-->
+<!--                              stack-label-->
+<!--                              />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.bitcoin"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="BitCoin"-->
+<!--                              stack-label-->
+<!--                              />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.payeer"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="Payeer"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.liteCoin"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="LiteCoin"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.dogeCoin"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="DogeCon"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.etherium"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="Etherium"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.ripple"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="Ripple"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.erc20"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="TetherUsd ERC20"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.trc20"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="TetherUsd TRC20"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
+<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
+<!--                            <q-input dark-->
+<!--                              v-model="wallets.paypal"-->
+<!--                              type="text"-->
+<!--                              outlined-->
+<!--                              label="PayPal"-->
+<!--                              stack-label-->
+<!--                            />-->
+<!--                          </div>-->
                         </div>
                       </div>
                     </div>
@@ -409,6 +409,7 @@ export default {
       file: null,
       sum: null,
       user: null,
+      wallets: null,
       errors: null,
       successRegistration: false,
       options: ['male', 'female'],
@@ -422,7 +423,10 @@ export default {
     };
   },
   mounted() {
+    store.actions.GetWallets()
     this.user = {...store.state.user}
+    this.wallets = store.state.wallets?.data?.data
+    console.log(this.wallets)
     // this.user = {
     //     name: 'Иванов Иван Александрович',
     //     phone: '+7 984 384 4224',

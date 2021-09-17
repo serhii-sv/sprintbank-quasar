@@ -121,16 +121,6 @@ export default {
     return {
       tab: 'month',
       slides: [
-        // {
-        //   name: 'Bitcoin',
-        //   shortName: 'BTC',
-        //   icon: 'fab fa-bitcoin',
-        //   percent: -2.53,
-        //   balance: 8291,
-        //   sum: 2261000,
-        //   currency: '$',
-        //   bg: '#000'
-        // },
         {
           name: 'Ethereum',
           shortName: 'ETH',
@@ -141,16 +131,6 @@ export default {
           currency: '$',
           bg: '#000'
         },
-        // {
-        //   name: 'Litecoin',
-        //   shortName: 'LTC',
-        //   icon: 'fab fa-bitcoin',
-        //   percent: -8.53,
-        //   balance: 1312291,
-        //   sum: 849000,
-        //   currency: '$',
-        //   bg: '#000'
-        // }
       ],
       LineChart: {
         tooltip: {

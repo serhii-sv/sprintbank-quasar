@@ -32,13 +32,13 @@ export default {
   },
   methods: {
     getChipColor(status) {
-      if (status == "Отменен") {
+      if (status == "canceled") {
         return "negative";
-      } else if (status == "Отправлен") {
-        return "positive";
-      } else if (status == "В процессе") {
-        return "warning";
       } else if (status == "completed") {
+        return "positive";
+      } else if (status == "process") {
+        return "warning";
+      } else if (status == "progress") {
         return "info";
       } else {
         return "dark";
@@ -66,7 +66,7 @@ export default {
         {
           name: "Type",
           label: "Тип",
-          field: row => row.type.name,
+          field: row => row.type?.name,
           format: val => `${val}`,
           sortable: true,
           align: "left",
