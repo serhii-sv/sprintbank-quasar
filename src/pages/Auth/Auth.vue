@@ -1,5 +1,9 @@
 <template>
   <div style="max-width: 600px; margin: auto" class="fit q-pa-lg overflow-hidden-x bg-dark">
+    <page-header>
+      <template #title><b>Sprint</b><span>Bank</span>
+      </template>
+    </page-header>
 <!--    <q-btn v-close-popup class="q-ma-md" @click="close()"  flat dense icon="close"/>-->
     <q-tabs
       v-model="tab"

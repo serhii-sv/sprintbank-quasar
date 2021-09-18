@@ -1,8 +1,15 @@
 <template>
   <div>
+    <page-header v-if="$route.fullPath !== '/'">
+      <!--      <template #buttons-left>-->
+      <!--        <page-header-btn-back-->
+      <!--        />-->
+      <!--      </template>-->
+      <template #title>Депозиты</template>
+    </page-header>
     <q-table
       class="my-sticky-header-column-table"
-      title="Депозиты"
+      title=""
       :rows="store.state.deposits?.data?.data"
       :columns="columns"
       row-key="name"

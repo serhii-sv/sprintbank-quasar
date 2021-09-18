@@ -1,5 +1,12 @@
 <template>
   <div>
+    <page-header v-if="$route.fullPath !== '/'">
+      <!--      <template #buttons-left>-->
+      <!--        <page-header-btn-back-->
+      <!--        />-->
+      <!--      </template>-->
+      <template #title>Курс SprintToken</template>
+    </page-header>
     <div v-for="(slide, index) in slides" :key="index">
       <q-item class="bg-black">
         <q-item-section top avatar>
@@ -104,7 +111,7 @@
         </tr>
         </tbody>
       </table>
-      <CardSlider/>
+<!--      <CardSlider/>-->
     </div>
 
   </div>
@@ -112,11 +119,10 @@
 
 <script>
 import {VueEcharts} from "vue3-echarts";
-import CardSlider from "components/cards/CardSlider";
 
 export default {
   name: "Statistic",
-  components: {VueEcharts, CardSlider},
+  components: {VueEcharts},
   data() {
     return {
       tab: 'month',

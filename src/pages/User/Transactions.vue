@@ -1,8 +1,16 @@
 <template>
   <div>
+    <page-header v-if="$route.fullPath !== '/'">
+<!--      <template #buttons-left>-->
+<!--        <page-header-btn-back-->
+<!--        />-->
+<!--      </template>-->
+      <template #title>Транзакции</template>
+    </page-header>
+    <div>
     <q-table
       class="my-sticky-header-column-table"
-      title="Транзакции"
+      title=""
       :rows="store.state.transactions?.data?.data?.slice(count || 0)"
       :columns="columns"
       :title-class="!!count?'hidden': null"
@@ -18,7 +26,7 @@
         </q-td>
       </template>
     </q-table>
-
+    </div>
   </div>
 </template>
 <script>

@@ -111,6 +111,20 @@ const actions = {
         return {error};
       });
   },
+  UpdateWallet:  (id,body) => {
+    return axios
+      .put(`${api}/wallets/${id}`, body)
+      .then(response => {
+        if (response.data) {
+          store.actions.GetUserData()
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
   DeleteUser: () => {
     return axios.delete(`${api}/user`)
   },

@@ -26,7 +26,7 @@
       >
         <div class="flex-center column">
           <q-icon size="24px" v-if="$q.screen.lt.sm" name="fas fa-user"></q-icon>
-          <span class="hide-xs">{{ $t('Login') }}</span>
+          <span class="hide-xs">Логин</span>
         </div>
       </q-route-tab>
       <q-btn
@@ -40,18 +40,9 @@
         </div>
         <q-menu class="bg-dark text-white">
           <q-list class="text-white" style="min-width: 100px">
-            <q-item v-if="store?.getters?.isAdmin()" :to="{ path: 'users' }" v-close-popup>
-              <q-item-section avatar>
-                <q-avatar color="black" text-color="white" icon="people"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-white">{{ $t('Users') }}</q-item-label>
-              </q-item-section>
-              <q-item-section side></q-item-section>
-            </q-item>
             <q-item :to="{ path: '/news' }" v-close-popup>
               <q-item-section avatar>
-                <q-avatar color="black" text-color="white" icon="perm_identity"/>
+                <q-avatar color="black" text-color="white" icon="far fa-newspaper"/>
               </q-item-section>
               <q-item-section>
                 <q-item-label class="text-white">Новости</q-item-label>
@@ -60,19 +51,28 @@
             </q-item>
             <q-item :to="{ path: '/statistics' }" v-close-popup>
               <q-item-section avatar>
-                <q-avatar color="black" text-color="white" icon="perm_identity"/>
+                <q-avatar color="black" text-color="white" icon="fas fa-chart-line"/>
               </q-item-section>
               <q-item-section>
-                <q-item-label class="text-white">Статистика</q-item-label>
+                <q-item-label class="text-white">Курс SprintToken</q-item-label>
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>
             <q-item :to="{ path: '/referal' }" v-close-popup>
               <q-item-section avatar>
-                <q-avatar color="black" text-color="white" icon="perm_identity"/>
+                <q-avatar color="black" text-color="white" icon="fas fa-users"/>
               </q-item-section>
               <q-item-section>
                 <q-item-label class="text-white">Реферальная система</q-item-label>
+              </q-item-section>
+              <q-item-section side></q-item-section>
+            </q-item>
+            <q-item :to="{ path: '/referals' }" v-close-popup>
+              <q-item-section avatar>
+                <q-avatar color="black" text-color="white" icon="fas fa-user-friends"/>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class="text-white">Мои рефералы</q-item-label>
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>

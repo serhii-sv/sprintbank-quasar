@@ -3,10 +3,10 @@ import {createRouter, createWebHistory} from "vue-router";
 
 const ifNotAuthenticated = (to, from, next) => {
   // if (store.getters.isAuthenticated()) {
-    next();
-    // return
+  next();
+  // return
   // }
-    // next("/auth").catch(() => {});
+  // next("/auth").catch(() => {});
 
 };
 
@@ -27,6 +27,14 @@ const routes = [
       {
         path: '',
         beforeEnter: ifNotAuthenticated,
+        children: [
+          {
+            name: "transactions",
+            path: "transactions",
+            beforeEnter: ifNotAuthenticated,
+            component: () => import("pages/User/Transactions.vue")
+          },
+        ],
         component: () => import('pages/User/Dashboard.vue'),
       },
       {

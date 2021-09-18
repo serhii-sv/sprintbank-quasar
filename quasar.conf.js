@@ -24,7 +24,9 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
-      'social'
+      'social',
+      'global-components',
+      // 'router'
     ],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -104,7 +106,7 @@ module.exports = configure(function (ctx) {
 
     // animations: 'all', // --- includes all animations
     // https://v2.quasar.dev/options/animations
-    animations: [],
+    animations: ['slideInRight', 'slideOutRight', 'fadeIn', 'fadeOut'],
 
     // https://v2.quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

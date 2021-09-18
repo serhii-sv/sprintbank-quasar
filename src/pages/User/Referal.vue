@@ -1,13 +1,22 @@
 <template>
+  <div>
+    <page-header v-if="$route.fullPath !== '/'">
+      <!--      <template #buttons-left>-->
+      <!--        <page-header-btn-back-->
+      <!--        />-->
+      <!--      </template>-->
+      <template #title>Реферальная система</template>
+    </page-header>
   <q-table
     dark
     class="my-sticky-header-column-table"
-    title="Реферальная система"
+    title=""
     :rows="rows"
     :columns="columns"
     row-key="name"
     :rows-per-page-options="[0]"
   />
+  </div>
 </template>
 
 <script>
