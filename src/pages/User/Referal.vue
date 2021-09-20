@@ -16,6 +16,15 @@
     row-key="name"
     :rows-per-page-options="[0]"
   />
+    <q-table
+      dark
+      class="my-sticky-header-column-table"
+      title=""
+      :rows="rows1"
+      :columns="columns1"
+      row-key="name"
+      :rows-per-page-options="[0]"
+    />
   </div>
 </template>
 
@@ -82,6 +91,59 @@ export default {
         {
           name: "Активных партнеров",
           value: 230
+        }
+      ],
+      columns1: [
+        {
+          name: "name",
+          label: "Логин",
+          field: row => row.name,
+          format: val => `${val}`,
+          sortable: true,
+          align: "left"
+        },
+        {
+          name: "referals",
+          label: "Инвестировано",
+          field: row => row.referals,
+          format: val => `${val}`,
+          sortable: true,
+          align: "left"
+        },
+        {
+          name: "profit",
+          label: "Вознаграждение",
+          field: row => row.profit,
+          format: val => `${val}`,
+          sortable: true,
+          align: "left"
+        }
+      ],
+      rows1: [
+        {
+          name: "ivan1345",
+          referals: 20,
+          profit: 1243
+        },
+        {
+          name: "alex21345",
+          referals: 2,
+          profit: 124
+        },
+        {
+          name: "petr221345",
+          referals: 25,
+          profit: 2098
+        },
+        {
+          name: "vlad21345",
+          referals: 100,
+          profit: 12999
+        },
+        {
+          name: "semen125",
+          referals: 0,
+          profit: 209
         }
       ]
     }

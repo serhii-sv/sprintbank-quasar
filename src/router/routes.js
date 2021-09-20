@@ -80,12 +80,6 @@ const routes = [
         component: () => import("pages/Statistics/Statistics.vue")
       },
       {
-        name: "referals",
-        path: "referals",
-        beforeEnter: ifNotAuthenticated,
-        component: () => import("pages/User/Referals.vue")
-      },
-      {
         name: "reset",
         path: "reset",
         component: () => import("pages/Auth/ResetPassword.vue")

@@ -35,8 +35,8 @@
         style="font-weight: normal;"
         no-caps>
         <div class="flex-center column">
-          <q-icon v-if="$q.screen.lt.sm" name="fas fa-user"></q-icon>
-          <span class="hide-xs">Аккаунт</span>
+          <q-icon v-if="$q.screen.lt.sm" name="fas fa-ellipsis-h"></q-icon>
+          <span class="hide-xs">Ещё</span>
         </div>
         <q-menu class="bg-dark text-white">
           <q-list class="text-white" style="min-width: 100px">
@@ -58,21 +58,12 @@
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>
-            <q-item :to="{ path: '/referal' }" v-close-popup>
+            <q-item :to="{ path: '/deposits' }" v-close-popup>
               <q-item-section avatar>
-                <q-avatar color="black" text-color="white" icon="fas fa-users"/>
+                <q-avatar color="black" text-color="white" icon="fas fa-suitcase"/>
               </q-item-section>
               <q-item-section>
-                <q-item-label class="text-white">Реферальная система</q-item-label>
-              </q-item-section>
-              <q-item-section side></q-item-section>
-            </q-item>
-            <q-item :to="{ path: '/referals' }" v-close-popup>
-              <q-item-section avatar>
-                <q-avatar color="black" text-color="white" icon="fas fa-user-friends"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-white">Мои рефералы</q-item-label>
+                <q-item-label class="text-white">Депозиты</q-item-label>
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>

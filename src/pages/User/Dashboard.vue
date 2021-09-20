@@ -24,44 +24,13 @@
           </q-item-section>
         </q-item>
       </q-card-section>
-      <q-card-section class="row bg-dark no-padding">
-        <div class="col-lg-7 col-sm-12 col-xs-12 col-md-7">
-          <q-item>
-            <q-item-section top avatar>
-              <q-avatar size="50px" rounded text-color="white" class="bg-grey-10" icon="fab fa-bitcoin"/>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-h6 text-white">Bitcoin</q-item-label>
-              <q-item-label class="text-grey-7 text-bold" caption>0.1 BTC</q-item-label>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-h6 text-white text-right">$22.610.00</q-item-label>
-              <q-item-label class="text-grey-7 text-bold text-right" caption>-2.53%</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item>
-            <q-item-section top avatar>
-              <q-avatar size="50px" rounded text-color="white" class="bg-grey-10" icon="fab fa-ethereum"/>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-h6 text-white">Etherium</q-item-label>
-              <q-item-label class="text-grey-7 text-bold" caption>0.1 BTC</q-item-label>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-h6 text-white text-right">$14.000.00</q-item-label>
-              <q-item-label class="text-grey-7 text-bold text-right" caption>+ 1,33%</q-item-label>
-            </q-item-section>
-          </q-item>
-        </div>
-      </q-card-section>
       <q-card-section>
 
-<!--        <Transactions :count="-5"/>-->
+        <Transactions :count="-5"/>
         <q-btn class="q-mt-md" color="primary" label="Все транзанкции" to="transactions"/>
         <div class="q-py-md">
           <vue-echarts style="height: 250px" :option="getSalesOptions" :resizable="true"/>
         </div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque earum ex magni neque nihil officia possimus quas unde. Deserunt dolorem, eius est ex exercitationem nihil porro quam quibusdam repellat suscipit.
       </q-card-section>
     </div>
   </div>
@@ -70,7 +39,6 @@
 
 <script>
 import {VueEcharts} from "vue3-echarts";
-import CardSocial from "components/cards/CardSocial";
 import CardCharts from "components/cards/CardCharts";
 import store from "src/myStore";
 import Transactions from "pages/User/Transactions";
@@ -78,7 +46,7 @@ import Transactions from "pages/User/Transactions";
 export default {
   name: "Dashboard",
   components: {
-    // Transactions,
+    Transactions,
     CardCharts,
     VueEcharts
   },
