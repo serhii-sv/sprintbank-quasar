@@ -79,7 +79,7 @@ export default {
         xAxis: [
           {
             type: "category",
-            data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            data: ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]
           }
         ],
         yAxis: [
@@ -92,28 +92,16 @@ export default {
         ],
         series: [
           {
-            name: "Bitcoin",
+            name: "Рост",
             type: "bar",
             data: [40, 45, 27, 50, 32, 50, 70, 30, 30, 40, 67, 29],
-            color: "#546bfa"
+            color: "#5ffa54"
           },
           {
-            name: "Ethereum",
+            name: "Падение",
             type: "bar",
             data: [124, 100, 20, 120, 117, 70, 110, 90, 50, 90, 20, 50],
-            color: "#3a9688"
-          },
-          {
-            name: "Litecoin",
-            type: "bar",
-            data: [17, 2, 0, 29, 20, 10, 23, 0, 8, 20, 11, 30],
-            color: "#02a9f4"
-          },
-          {
-            name: "Ripple",
-            type: "bar",
-            data: [20, 100, 80, 14, 90, 86, 100, 70, 120, 50, 30, 60],
-            color: "#f88c2b"
+            color: "#ff0000"
           }
         ]
       };

@@ -119,6 +119,7 @@
 <!--                                </template>-->
 <!--                              </q-input>-->
 <!--                            </div>-->
+                          <vue-qrcode :backgroundOptions="{ color: '#000' }" :value="'https://quasar.sprintbank.us' + this.$route.fullPath" />
                         </div>
                       </div>
                     </div>
@@ -251,8 +252,12 @@
 </template>
 
 <script>
+import VueQrcode from 'vue3-qrcode'
 import store from 'src/myStore'
 export default {
+  components: {
+    VueQrcode,
+  },
   setup(){
     return{
       store
@@ -295,30 +300,6 @@ export default {
     store.actions.GetWallets()
     this.user = {...store.state.user}
     this.wallets = store.state.wallets?.data?.data
-    console.log(this.wallets)
-    // this.user = {
-    //     name: 'Иванов Иван Александрович',
-    //     phone: '+7 984 384 4224',
-    //     sex: 'Мужской',
-    //     email: 'ivanov1988@gmail.com',
-    //     country: 'Россия',
-    //     city: 'Москва',
-    //     card: '1234 1234 1234 1234',
-    //     perfectMoney: 'U12345768',
-    //     advCash: 'vanov1988@gmail.com',
-    //     qiwi: '+7 984 384 4224',
-    //     yooMoney: '410123123123',
-    //     bitcoin: '18QAjfijwfe34352552354234jfFj',
-    //     payeer: '18QAjfijwfe34352552354234jfFj',
-    //     liteCoin: '18QAjfijwfe34352552354234jfFj',
-    //     dogeCoin: '18QAjfijwfe34352552354234jfFj',
-    //     etherium: '18QAjfijwfe34352552354234jfFj',
-    //     ripple: '18QAjfijwfe34352552354234jfFj',
-    //     erc20: '18QAjfijwfe34352552354234jfFj',
-    //     trc20: '18QAjfijwfe34352552354234jfFj',
-    //     paypal: 'vanov1988@gmail.com',
-    // }
-    // console.log(this.user)
   },
   methods: {
     notify(message,color) {

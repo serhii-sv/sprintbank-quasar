@@ -98,30 +98,24 @@ export default {
         },
         "series": [{"type": "line", "areaStyle": {}, "smooth": true}],
         "dataset": {
-          "source": [{"month": "Jan", "Unique Visit": 296, "Page View": 548}, {
+          "source": [{"month": "Jan", "Unique Visit": 10}, {
             "month": "Feb",
-            "Unique Visit": 1181,
-            "Page View": 714
+            "Unique Visit": 40,
           }, {"month": "Mar", "Unique Visit": 235, "Page View": 961}, {
             "month": "Apr",
             "Unique Visit": 294,
-            "Page View": 580
           }, {"month": "May", "Unique Visit": 765, "Page View": 730}, {
             "month": "Jun",
             "Unique Visit": 412,
-            "Page View": 1249
           }, {"month": "Jul", "Unique Visit": 1125, "Page View": 267}, {
             "month": "Aug",
             "Unique Visit": 800,
-            "Page View": 251
           }, {"month": "Sep", "Unique Visit": 948, "Page View": 1043}, {
             "month": "Oct",
             "Unique Visit": 1046,
-            "Page View": 1118
           }, {"month": "Nov", "Unique Visit": 363, "Page View": 573}, {
             "month": "Dec",
             "Unique Visit": 909,
-            "Page View": 283
           }]
         },
         "color": ["#000"]

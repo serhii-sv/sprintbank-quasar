@@ -32,6 +32,7 @@ const state = reactive({
   transactions: null,
   deposits: null,
   wallets: null,
+  sprintToken: null,
   access_token: localStorage.getItem('access_token'),
   user: JSON.parse(localStorage.getItem('user')),
   usePageTransition: false,
@@ -59,6 +60,21 @@ const actions = {
         if (response.data) {
           state.wallets = response.data.data
           return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetSprintToken: () => {
+    return axios
+      .get(`${api}/graphs/sprint-token`)
+      .then(response => {
+        if (response.data) {
+          console.log(response)
+          state.sprintToken = response.data.data
+          return response.data.data;
         }
         return false;
       })
