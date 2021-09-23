@@ -76,7 +76,7 @@
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>
-            <div @click="store.actions.authLogout()">
+            <div @click="logout()">
               <q-item v-close-popup>
                 <q-item-section avatar>
                   <q-avatar color="black" text-color="white" icon="sensor_door"/>
@@ -108,6 +108,7 @@ export default {
   methods: {
     logout() {
       store.actions.authLogout()
+      this.$router.push('/auth')
     }
   }
 };

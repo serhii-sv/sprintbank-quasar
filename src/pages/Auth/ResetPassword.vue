@@ -7,10 +7,11 @@
       </template>
       <div   v-if="!sent">
         <q-input
+          dark
           dense
           v-model="email"
           class="q-mb-md"
-          type="password"
+          type="email"
           label="Введите ваш Email *"/>
       <q-btn
         class="bg-primary text-white q-mt-md"
@@ -20,6 +21,7 @@
       </div>
 <div v-if="sent && !confirmed">
   <q-input
+    dark
     dense
     v-model="token"
     class="q-mb-md"
@@ -34,6 +36,7 @@
 
         <div v-if="confirmed">
           <q-input
+            dark
             dense
             v-model="password"
             class="q-mb-md"
@@ -43,6 +46,7 @@
           <!--          Пароль обязательное поле-->
           <!--        </p>-->
         <q-input
+          dark
           dense
           v-model="passwordConfirmation"
           class="q-mb-md"
@@ -122,7 +126,7 @@ export default {
             this.notify("Пароль обновлен");
             // this.close();
             setTimeout(() => {
-              this.$router.push('/')
+              this.$router.push('/auth')
             }, 2500);
           // })
           // .catch(error => {

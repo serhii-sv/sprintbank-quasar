@@ -4,11 +4,24 @@
       <q-input
         dark
         dense
-        v-model.trim="email"
+        v-model.trim="v$.email.$model"
+        :class="status(v$.email)"
         class="q-mb-md"
-        type="email"
         placeholder="ivanpetrov@gmail.com"
         label="Email *"/>
+      <div class="input-errors" v-for="error of v$.email.$errors" :key="error.$uid">
+        <div class="error-msg">{{ error.$message }}</div>
+      </div>
+<!--      <q-input-->
+<!--        dark-->
+<!--        dense-->
+<!--        v-model.trim="email"-->
+<!--        class="q-mb-md"-->
+<!--        placeholder="ivanpetrov@gmail.com"-->
+<!--        label="Email *"/>-->
+      <!--      <p v-show="$v.email.$dirty && !$v.email.required" class="text-red">-->
+      <!--        Email обязательное поле-->
+      <!--      </p>-->
       <div v-show="tab != 'login'">
         <q-input
           dark
@@ -41,9 +54,9 @@
           class="q-mb-md"
           type="password"
           label="Пароль *"/>
-        <!--        <p v-show="$v.password.$dirty && !$v.password.required" class="text-red">-->
-        <!--          Пароль обязательное поле-->
-        <!--        </p>-->
+        <!--                <p v-show="$v.password.$dirty && !$v.password.required" class="text-red">-->
+        <!--                  Пароль обязательное поле-->
+        <!--                </p>-->
       </div>
       <div v-show="tab == 'register'">
         <q-input
@@ -86,35 +99,58 @@ p {
 <script>
 import SocialLogin from "pages/Auth/SocialLogin";
 import store from "src/myStore";
-
+import {email, required} from '@vuelidate/validators'
+import useVuelidate from "@vuelidate/core";
 export default {
   components: {SocialLogin},
   setup() {
     return {
-      store
+      store,
+      v$: useVuelidate()
     }
   },
   data() {
     return {
+
       role: 'user',
-      email: this.user ? this.user.email : 'klein.laisha@yahoo.com',
+      email: this.user ? this.user.email : 'admin@gmail.com',
       name: this.user ? this.user.name : null,
       phone: this.user ? this.user.phone : null,
       error: null,
       sex: null,
-      options: ['male', 'female'],
+      options: [
+        {
+          label: 'Мужской',
+          value: 'male'
+        },
+        {
+          label: 'Женский',
+          value: 'female'
+        }
+      ],
       avatar: this.user ? this.user.avatar : null,
-      password: 'demopassword',
+      password: 'admin',
       passwordConfirmation: null,
       file: null,
     }
   },
+  validations() {
+    return {
+      email: {required, email} // Matches this.email
+    }
+  },
   props: ['tab', 'user', 'hide'],
   methods: {
-    notify(message) {
+    status(validation) {
+      return {
+        error: validation.$error,
+        dirty: validation.$dirty
+      }
+    },
+    notify(message, color = 'primary') {
       this.$q.notify({
         message: message,
-        color: 'primary',
+        color: color,
         multiLine: true,
       })
     },
@@ -133,26 +169,26 @@ export default {
         sex: this.sex,
       };
 
-      // this.$v.$touch();
-      // if (this.$v.$invalid) {
-      //   return;
-      // }
+      this.v$.$touch();
+      if (this.v$.$invalid) {
+        return;
+      }
       if (this.tab == 'login') {
         store.actions.authRequest(user)
           .then(() => {
-            this.notify("Login successful");
+            this.notify("Авторизация успешна");
             if (this.$route.fullPath !== '/') {
               this.$router.push("/");
             }
-            // if (this.error) {
-            //   this.error = null;
-            // }
+            if (this.error) {
+              this.error = null;
+            }
           })
           .catch(error => {
-            this.error = error;
+            this.notify("Введенные данные неверны", 'red')
           });
 
-      } else if (this.tab == 'register') {
+      } else {
         store.actions.authRegister(user)
           .then(() => {
             this.error = null;
@@ -164,19 +200,7 @@ export default {
             }, 2500);
           })
           .catch(error => {
-            console.log(error)
-            // this.error = error.response.data.message;
-          });
-      } else {
-        store.actions.UpdateUserProf(user, this.user.id)
-          .then(() => {
-            this.$emit("updatedForm");
-            this.notify("Данные обновлены");
-            setTimeout(() => {
-            }, 2500);
-          })
-          .catch(error => {
-            this.error = error.response.data.message;
+            this.notify("Введенные данные неверны", 'red')
           });
       }
     }

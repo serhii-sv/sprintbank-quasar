@@ -142,29 +142,31 @@ const actions = {
   DeleteUser: () => {
     return axios.delete(`${api}/user`)
   },
-  async authRequest(payload) {
+  authRequest: payload => {
     let actionUrl = api + "/login";
     let data = {
       email: payload.email,
       password: payload.password
     };
-    await axios
-      .post(actionUrl, data)
-      .then(resp => {
-        let access_token = "Bearer " + resp.data.api_token;
-        state.access_token = access_token;
-        state.user = resp.data;
-        localStorage.setItem("access_token", access_token);
-        localStorage.setItem("user", JSON.stringify(resp.data));
-        axios.defaults.headers.common["Authorization"] = access_token;
-        return access_token;
-      })
-      .catch(err => {
-        console.log(err);
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("user");
-        return err;
-      });
+    return new Promise((resolve, reject) => {
+      axios
+        .post(actionUrl, data)
+        .then(resp => {
+          let access_token = "Bearer " + resp.data.api_token;
+          state.access_token = access_token;
+          state.user = JSON.stringify(resp.data);
+          localStorage.setItem("access_token", access_token);
+          localStorage.setItem("user", JSON.stringify(resp.data));
+          axios.defaults.headers.common["Authorization"] = access_token;
+          resolve(access_token);
+        })
+        .catch(err => {
+          console.log(err);
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("user");
+          reject(err);
+        });
+    });
   },
   UpdatePassword: password => {
     const userId = jwt_decode(localStorage.getItem("access_token")).sub;
@@ -203,6 +205,7 @@ const actions = {
                   .catch(err => {
                     console.log(err);
                     reject(err);
+                    return "err"
                   });
                 resolve();
                 return response.data;
@@ -212,6 +215,7 @@ const actions = {
         )
         .catch(err => {
           reject(err);
+          return err
         });
     });
   },

@@ -63,7 +63,6 @@
                             </q-input>
                           </div>
                           <div class="col-12 col-md-4 q-pa-sm">
-                            {{$t('male')}}
                               <q-select
                                 dark
                                 v-model="user.sex"
@@ -119,7 +118,7 @@
 <!--                                </template>-->
 <!--                              </q-input>-->
 <!--                            </div>-->
-                          <vue-qrcode :backgroundOptions="{ color: '#000' }" :value="'https://quasar.sprintbank.us' + this.$route.fullPath" />
+<!--                          <vue-qrcode :backgroundOptions="{ color: '#000' }" :value="'https://quasar.sprintbank.us' + this.$route.fullPath" />-->
                         </div>
                       </div>
                     </div>
@@ -256,6 +255,7 @@ import VueQrcode from 'vue3-qrcode'
 import store from 'src/myStore'
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     VueQrcode,
   },
   setup(){
@@ -286,7 +286,16 @@ export default {
       wallets: null,
       errors: null,
       successRegistration: false,
-      options: ['male', 'female'],
+      options: [
+        {
+          label: 'Мужской',
+          value: 'male'
+        },
+        {
+          label: 'Женский',
+          value: 'female'
+        }
+      ],
       message: null,
       passwordForm: {
         password: null,
@@ -313,14 +322,9 @@ export default {
       store.actions.UpdateWallet(id, {external: value})
         .then(() => {
           this.notify("Кошелек успешно обновлен", 'primary');
-          this.message = "Кошелек успешно обновлен";
-          // store.actions.GetWallets()
-
         })
         .catch(error => {
-          this.notify("Ошибка про обновлении кошелька", 'primary');
-          // this.message = "Ошибка про обновлении кошелька";
-          console.log(error.error.response.data);
+          this.notify("Ошибка при обновлении кошелька", 'primary');
         });
     },
     submitProfileForm() {
@@ -338,11 +342,10 @@ export default {
       console.log(profile)
       store.actions.Update(profile)
         .then(() => {
-          this.$emit("updatedForm");
-          this.message = "Профиль успешно обновлен";
+          this.notify("Профиль успешно обновлен", 'primary');
         })
         .catch(error => {
-          console.log(error.error.response.data);
+          this.notify("Ошибка при обновлении профиля",'red');
         });
     },
     submitPasswordForm() {
@@ -359,7 +362,7 @@ export default {
           this.passwordMessage = "Пароль успешно обновлен";
         })
         .catch(() => {
-          this.passwordError = "Ошибка";
+          this.passwordError = "Ошибка при обновлении пароля";
         });
     }
   }

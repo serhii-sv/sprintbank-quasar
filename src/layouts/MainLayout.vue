@@ -30,7 +30,7 @@
         </transition>
       </router-view>
     </q-page-container>
-    <q-footer class="bg-black-t text-primary roundedUp">
+    <q-footer v-if="this.$route.fullPath !=='/auth'" class="bg-black-t text-primary roundedUp">
       <AppNav/>
     </q-footer>
   </q-layout>
