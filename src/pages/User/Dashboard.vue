@@ -58,6 +58,8 @@ export default {
   },
   mounted() {
     this.user = store?.getters.getUser()
+    store.actions.GetTransactionsChart()
+    console.log(store.actions.GetTransactionsChart())
   },
   computed: {
     getSalesOptions() {
@@ -79,7 +81,8 @@ export default {
         xAxis: [
           {
             type: "category",
-            data: ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]
+            // data: ["Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]
+            data: store.state.transactionsChart?.data?.days
           }
         ],
         yAxis: [
@@ -94,13 +97,15 @@ export default {
           {
             name: "Рост",
             type: "bar",
-            data: [40, 45, 27, 50, 32, 50, 70, 30, 30, 40, 67, 29],
+            // data: [1,2,3,4,5,6],
+            data: store.state.transactionsChart?.data?.replenishments,
             color: "#5ffa54"
           },
           {
             name: "Падение",
             type: "bar",
-            data: [124, 100, 20, 120, 117, 70, 110, 90, 50, 90, 20, 50],
+            // data: [1,2,3,4,5,6],
+            data: store.state.transactionsChart?.data?.withdrawals,
             color: "#ff0000"
           }
         ]

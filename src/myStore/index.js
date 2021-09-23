@@ -30,6 +30,7 @@ const state = reactive({
 
   ],
   transactions: null,
+  transactionsChart: null,
   deposits: null,
   wallets: null,
   sprintToken: null,
@@ -45,6 +46,20 @@ const actions = {
       .then(response => {
         if (response.data) {
           state.transactions = response.data
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  async GetTransactionsChart() {
+    return await axios
+      .get(`${api}/graphs/transactions`)
+      .then(response => {
+        if (response.data) {
+          state.transactionsChart = response.data
           return response.data;
         }
         return false;
@@ -89,6 +104,46 @@ const actions = {
         if (response.data) {
           state.deposits = response.data
           return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetNews: () => {
+    return axios
+      .get(`${api}/news`)
+      .then(response => {
+        if (response.data) {
+          state.news = response.data.data.data
+          return response.data.data.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetNewsById: (id) => {
+    return axios
+      .get(`${api}/news`, id)
+      .then(response => {
+        if (response.data) {
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetReferalLink: () => {
+    return axios
+      .get(`${api}/referal`)
+      .then(response => {
+        if (response.data) {
+          return response.data
         }
         return false;
       })
@@ -169,8 +224,26 @@ const actions = {
     });
   },
   UpdatePassword: password => {
-    const userId = jwt_decode(localStorage.getItem("access_token")).sub;
-    return axios.put(`${api}/users/` + userId, password);
+    return new Promise((resolve, reject) => {
+      axios.post(`${api}/password-change`, password)
+        .then(resp => {
+          resolve(resp);
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
+  ForgetPassword: email => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${api}/password-change`, email)
+        .then(resp => {
+          resolve(resp);
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
   },
   authLogout: () => {
     localStorage.removeItem('user')

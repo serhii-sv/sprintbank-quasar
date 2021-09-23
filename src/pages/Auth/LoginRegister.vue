@@ -128,10 +128,8 @@ export default {
           value: 'female'
         }
       ],
-      avatar: this.user ? this.user.avatar : null,
       password: 'admin',
       passwordConfirmation: null,
-      file: null,
     }
   },
   validations() {

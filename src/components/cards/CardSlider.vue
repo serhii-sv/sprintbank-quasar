@@ -1,13 +1,13 @@
 <template>
-  <swiper v-if="cards"
+  <swiper v-if="store.state.news"
           :slides-per-view="1.2"
           :space-between="1.2"
           @swiper="onSwiper"
           @slideChange="onSlideChange"
   >
-    <swiper-slide v-for="(data, index) in cards" :key="index">
+    <swiper-slide v-for="(data, index) in store.state.news" :key="index">
       <q-card class="text-white bg-black q-ma-md">
-        <q-img :src="data.img">
+        <q-img :src="data.image || 'https://placeimg.com/500/300/nature?t=' + Math.random()">
           <template v-slot:loading>
             <div class="text-subtitle1 text-white">
               Loading...
@@ -17,7 +17,7 @@
         <q-separator></q-separator>
         <q-card-section class="text-h5">{{ data.title }}</q-card-section>
         <q-card-section class="text-justify">
-          <div>{{ data.text }}</div>
+          <div>{{ data.short_content }}</div>
         </q-card-section>
         <q-card-actions>
           <q-btn
@@ -41,7 +41,7 @@
 <script>
 import {Swiper, SwiperSlide} from 'swiper/vue';
 import 'swiper/css';
-
+import store from 'src/myStore'
 export default {
   name: 'CardPagination',
   components: {Swiper, SwiperSlide},
@@ -57,46 +57,12 @@ export default {
       onSlideChange,
     };
   },
+  mounted() {
+      this.store.actions.GetNews()
+    },
   data() {
     return {
-      cards: [
-        {
-          img: 'https://placeimg.com/500/300/nature?t=' + Math.random(),
-          type: 'Категория1',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          title: 'Новость 1'
-        },
-        {
-          img: 'https://placeimg.com/500/300/nature?t=' + Math.random(),
-          type: 'Категория1',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          title: 'Новость 2'
-        },
-        {
-          img: 'https://placeimg.com/500/300/nature?t=' + Math.random(),
-          type: 'Категория1',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          title: 'Новость 3'
-        },
-        {
-          img: 'https://placeimg.com/500/300/nature?t=' + Math.random(),
-          type: 'Категория2',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          title: 'Новость 4'
-        },
-        {
-          img: 'https://placeimg.com/500/300/nature?t=' + Math.random(),
-          type: 'Категория2',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          title: 'Новость 5'
-        },
-        {
-          img: 'https://placeimg.com/500/300/nature?t=' + Math.random(),
-          type: 'Категория2',
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-          title: 'Новость 6'
-        },
-      ],
+      store: store,
     }
   },
   methods: {},

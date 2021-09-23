@@ -92,33 +92,6 @@
                                 </template>
                               </q-input>
                             </div>
-<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
-<!--                              <q-input dark-->
-<!--                                v-model="user.country"-->
-<!--                                type="text"-->
-<!--                                outlined-->
-<!--                                label="Страна"-->
-<!--                                stack-label-->
-<!--                              >-->
-<!--                                <template v-slot:prepend>-->
-<!--                                  <q-icon name="place"/>-->
-<!--                                </template>-->
-<!--                              </q-input>-->
-<!--                            </div>-->
-<!--                          <div class="col-12 col-md-4 q-pa-sm">-->
-<!--                              <q-input dark-->
-<!--                                v-model="user.city"-->
-<!--                                type="text"-->
-<!--                                outlined-->
-<!--                                label="Город"-->
-<!--                                stack-label-->
-<!--                              >-->
-<!--                                <template v-slot:prepend>-->
-<!--                                  <q-icon name="place"/>-->
-<!--                                </template>-->
-<!--                              </q-input>-->
-<!--                            </div>-->
-<!--                          <vue-qrcode :backgroundOptions="{ color: '#000' }" :value="'https://quasar.sprintbank.us' + this.$route.fullPath" />-->
                         </div>
                       </div>
                     </div>
@@ -140,6 +113,21 @@
                     <div class="row q-pb-md q-pt-md">
                       <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
                         <q-input dark
+                                 v-model="passwordForm.current_password"
+                                 class="mt-1"
+                                 id="new-password"
+                                 type="password"
+                                 outlined
+                                 label="Старый пароль"
+                                 stack-label
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="lock"/>
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
+                        <q-input dark
                                  v-model="passwordForm.password"
                                  class="mt-1"
                                  id="new-password"
@@ -155,7 +143,7 @@
                       </div>
                       <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
                         <q-input dark
-                                 v-model="passwordForm.passwordConfirmation"
+                                 v-model="passwordForm.password_confirmation"
                                  class="mt-1"
                                  id="passwordConfirmation"
                                  type="password"
@@ -172,7 +160,7 @@
                         class="col-12 q-pa-sm"
                       >
                         <q-btn
-                          @click="submitProfileForm"
+                          @click="submitPasswordForm"
                           class="bg-primary text-white"
                         >
                           Обновить пароль
@@ -192,8 +180,8 @@
                   >
                     <div class="row justify-between">
                       <div class="col-12 col-md-9">
-                        <div v-if="wallets" class="row q-pb-md">
-                          <div v-for="(wallet, index) in wallets" :key="index" class="col-12 col-md-4 q-pa-sm">
+                        <div v-if="store.state.wallets" class="row q-pb-md">
+                          <div v-for="(wallet, index) in store.state.wallets.data" :key="index" class="col-12 col-md-4 q-pa-sm">
                             <q-input dark
                               v-model="wallet.external"
                               class="mt-1"
@@ -298,8 +286,9 @@ export default {
       ],
       message: null,
       passwordForm: {
+        current_password: null,
         password: null,
-        passwordConfirmation: null
+        password_confirmation: null
       },
       passwordMessage: null,
       passwordError: null
@@ -308,7 +297,6 @@ export default {
   mounted() {
     store.actions.GetWallets()
     this.user = {...store.state.user}
-    this.wallets = store.state.wallets?.data?.data
   },
   methods: {
     notify(message,color) {
@@ -349,15 +337,16 @@ export default {
         });
     },
     submitPasswordForm() {
-      const password = {
-        password: this.passwordForm.password,
-        password_confirmation: this.passwordForm.passwordConfirmation
-      };
+      // const password = {
+      //   password: this.passwordForm.password,
+      //   password: this.passwordForm.password,
+      //   password_confirmation: this.passwordForm.passwordConfirmation
+      // };
 
       this.passwordMessage = null;
       this.passwordError = null;
 
-      store.actions.UpdatePassword(password)
+      store.actions.UpdatePassword(this.passwordForm)
         .then(() => {
           this.passwordMessage = "Пароль успешно обновлен";
         })
