@@ -8,19 +8,21 @@
       <template #title>Реферальная система</template>
     </page-header>
   <q-table
+    v-if="store.state.userStatistics"
     dark
     class="my-sticky-header-column-table"
     title=""
-    :rows="rows"
+    :rows="store.state.userStatistics.data"
     :columns="columns"
     row-key="name"
     :rows-per-page-options="[0]"
   />
     <q-table
+      v-if="store.state.referrals"
       dark
       class="my-sticky-header-column-table"
       title=""
-      :rows="rows1"
+      :rows="store.state.referrals.data"
       :columns="columns1"
       row-key="name"
       :rows-per-page-options="[0]"
@@ -29,15 +31,23 @@
 </template>
 
 <script>
+import store from "src/myStore"
 export default {
   name: "Referal",
+  mounted() {
+    console.log(store.actions.GetUserStatistics())
+    console.log(store.actions.GetReferrals())
+  },
+  methods: {
+  },
   data() {
     return {
+      store: store,
       columns: [
         {
-          name: "name",
+          name: "label",
           label: "Имя",
-          field: row => row.name,
+          field: row => row.label,
           format: val => `${val}`,
           sortable: true,
           align: "left"
@@ -53,43 +63,43 @@ export default {
       ],
       rows: [
         {
-          name: "Количество рефералов",
+          label: "Количество рефералов",
           value: 20,
         },
         {
-          name: "Заработано на рефералах",
+          label: "Заработано на рефералах",
           value: 23423,
         },
         {
-          name: "Оборот структуры",
+          label: "Оборот структуры",
           value: 123124,
         },
         {
-          name: "Заработано на рефералах",
+          label: "Заработано на рефералах",
           value: 3123123,
         },
         {
-          name: "Карьерный статус",
+          label: "Карьерный статус",
           value: "gold",
         },
         {
-          name: "Ваш аплйнер (тот кто пригласил)",
+          label: "Ваш аплйнер (тот кто пригласил)",
           value: "petrov1244",
         },
         {
-          name: "Количество переходов по реферальной ссылке",
+          label: "Количество переходов по реферальной ссылке",
           value: 1233,
         },
         {
-          name: "Сумма инвестиций партнеров",
+          label: "Сумма инвестиций партнеров",
           value: 223124,
         },
         {
-          name: "Зарегистрированных партнеров",
+          label: "Зарегистрированных партнеров",
           value: 444,
         },
         {
-          name: "Активных партнеров",
+          label: "Активных партнеров",
           value: 230
         }
       ],
@@ -97,7 +107,7 @@ export default {
         {
           name: "name",
           label: "Логин",
-          field: row => row.name,
+          field: row => row.login,
           format: val => `${val}`,
           sortable: true,
           align: "left"
@@ -105,7 +115,7 @@ export default {
         {
           name: "referals",
           label: "Инвестировано",
-          field: row => row.referals,
+          field: row => row.invested,
           format: val => `${val}`,
           sortable: true,
           align: "left"
@@ -113,39 +123,12 @@ export default {
         {
           name: "profit",
           label: "Вознаграждение",
-          field: row => row.profit,
+          field: row => row.reward,
           format: val => `${val}`,
           sortable: true,
           align: "left"
         }
       ],
-      rows1: [
-        {
-          name: "ivan1345",
-          referals: 20,
-          profit: 1243
-        },
-        {
-          name: "alex21345",
-          referals: 2,
-          profit: 124
-        },
-        {
-          name: "petr221345",
-          referals: 25,
-          profit: 2098
-        },
-        {
-          name: "vlad21345",
-          referals: 100,
-          profit: 12999
-        },
-        {
-          name: "semen125",
-          referals: 0,
-          profit: 209
-        }
-      ]
     }
   },
 }

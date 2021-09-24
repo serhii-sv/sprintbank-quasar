@@ -38,7 +38,7 @@
           <q-icon v-if="$q.screen.lt.sm" name="fas fa-ellipsis-h"></q-icon>
           <span class="hide-xs">Ещё</span>
         </div>
-        <q-menu class="bg-dark text-white">
+        <q-menu class="bg-black-t text-white">
           <q-list class="text-white" style="min-width: 100px">
             <q-item :to="{ path: '/news' }" v-close-popup>
               <q-item-section avatar>

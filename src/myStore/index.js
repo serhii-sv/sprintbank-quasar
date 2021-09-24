@@ -33,6 +33,8 @@ const state = reactive({
   transactionsChart: null,
   deposits: null,
   wallets: null,
+  referrals: null,
+  userStatistics: null,
   sprintToken: null,
   access_token: localStorage.getItem('access_token'),
   user: JSON.parse(localStorage.getItem('user')),
@@ -118,6 +120,34 @@ const actions = {
         if (response.data) {
           state.news = response.data.data.data
           return response.data.data.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetUserStatistics: () => {
+    return axios
+      .get(`${api}/user/statistic`)
+      .then(response => {
+        if (response.data) {
+          state.userStatistics = response.data
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetReferrals: () => {
+    return axios
+      .get(`${api}/referrals/referrals-list`)
+      .then(response => {
+        if (response.data) {
+          state.referrals = response.data
+          return response.data;
         }
         return false;
       })
@@ -236,7 +266,18 @@ const actions = {
   },
   ForgetPassword: email => {
     return new Promise((resolve, reject) => {
-      axios.post(`${api}/password-change`, email)
+      axios.post(`${api}/password/forget`, email)
+        .then(resp => {
+          resolve(resp);
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  },
+  ResetPassword: body => {
+    return new Promise((resolve, reject) => {
+      axios.post(`${api}/password/reset`, body)
         .then(resp => {
           resolve(resp);
         })
