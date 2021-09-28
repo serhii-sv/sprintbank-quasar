@@ -6,8 +6,8 @@
     </page-header>
 <!--    <page-body>-->
   <div class="q-pt-md">
-    <div v-if="user" class="q-px-md">
-      <p class="text-h6 text-weight-light">Здравствуй {{ user?.name }}!</p>
+    <div class="q-px-md">
+      <p class="text-h6 text-weight-light">Здравствуй {{ store?.getters.getUser()?.name }}!</p>
       <p class="text-h5">Ненастное утро может смениться ясным днём.</p>
     </div>
     <!--    <card-social icon_position="right" />-->
@@ -53,13 +53,11 @@ export default {
   data() {
     return {
       store: store,
-      user: null
     };
   },
   mounted() {
-    this.user = store?.getters.getUser()
+    store.actions.GetUserData()
     store.actions.GetTransactionsChart()
-    console.log(store.actions.GetTransactionsChart())
   },
   computed: {
     getSalesOptions() {

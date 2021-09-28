@@ -89,7 +89,6 @@ const actions = {
       .get(`${api}/graphs/sprint-token`)
       .then(response => {
         if (response.data) {
-          console.log(response)
           state.sprintToken = response.data.data
           return response.data.data;
         }
@@ -351,7 +350,7 @@ const actions = {
   }
 }
 const getters = {
-  isAuthenticated: () => !!state.access_token,
+  isAuthenticated: () => state.access_token,
   getUser: () => state.user,
 }
 const store = {

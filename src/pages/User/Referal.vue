@@ -35,10 +35,8 @@ import store from "src/myStore"
 export default {
   name: "Referal",
   mounted() {
-    console.log(store.actions.GetUserStatistics())
-    console.log(store.actions.GetReferrals())
-  },
-  methods: {
+    store.actions.GetUserStatistics()
+    store.actions.GetReferrals()
   },
   data() {
     return {

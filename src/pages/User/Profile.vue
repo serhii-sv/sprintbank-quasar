@@ -17,214 +17,161 @@
         >
           <q-tab class="w-100" label="Ваши данные" name="profile"/>
           <q-tab class="w-100" label="Реквизиты" name="requisite"/>
-<!--          <q-tab class="w-100" label="Платежи" name="pack"/>-->
+          <!--          <q-tab class="w-100" label="Платежи" name="pack"/>-->
         </q-tabs>
         <q-separator/>
         <q-tab-panels class="bg-dark" v-model="tab" animated>
           <q-tab-panel dark name="profile">
-<!--            <div class="text-h6 text-white">Профайл</div>-->
-              <div class="row">
-                <div class="col-12 col-md-12">
-                  <form
-                    @submit.prevent="submitProfileForm"
-                  >
-                    <div class="row justify-between">
-                      <div class="col-12 col-md-9">
-                        <div class="row">
-                          <div class="col-12 col-md-6 q-pa-sm">
-                            <q-input dark
-                                     class="mt-1"
-                                     id="mail"
-                                     type="text"
-                                     v-model="user.email"
-                                     outlined
-                                     disabled
-                                     readonly
-                                     label="E-Mail"
-                                     stack-label
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="mail"/>
-                              </template>
-                            </q-input>
+            <!--            <div class="text-h6 text-white">Профайл</div>-->
+            <div class="row">
+              <div class="col-12 col-md-12">
+                <form
+                  @submit.prevent="submitProfileForm"
+                >
+                  <div class="row justify-between">
+                    <div class="col-12 col-md-9">
+                      <div class="row">
+                        <div class="col-12 col-md-6 q-pa-sm">
+                          <q-input
+                            dark
+                            dense
+                            v-model.trim="v$.user.email.$model"
+                            :class="status(v$.user.email)"
+                            class="q-mb-md"
+                            placeholder="ivanpetrov@gmail.com"
+                            label="Email *">
+                            <template v-slot:prepend>
+                              <q-icon name="mail"/>
+                            </template>
+                          </q-input>
+                          <div class="input-errors" v-for="error of v$.user.email.$errors" :key="error.$uid">
+                            <div class="text-red">{{ error.$message }}</div>
                           </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="user.name"
-                              class="mt-1"
-                              type="text"
-                              outlined
-                              label="ФИО"
-                              stack-label
-                            >
-                              <template v-slot:prepend>
-                                <q-icon name="person"/>
-                              </template>
-                            </q-input>
+                        </div>
+                        <div class="col-12 col-md-4 q-pa-sm">
+                          <q-input
+                            v-model.trim="v$.user.name.$model"
+                            :class="status(v$.user.name)"
+                            dark
+                            dense
+                            class="q-mb-md"
+                            label="ФИО *"
+                          >
+                            <template v-slot:prepend>
+                              <q-icon name="person"/>
+                            </template>
+                          </q-input>
+                          <div class="input-errors" v-for="error of v$.user.name.$errors" :key="error.$uid">
+                            <div class="text-red">{{ error.$message }}</div>
                           </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                              <q-select
-                                dark
-                                v-model="user.sex"
-                                :model-value="user.sex"
-                                :options="options"
-                                type="text"
-                                outlined
-                                label="Пол"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="person"/>
-                                </template>
-                              </q-select>
+                        </div>
+                        <div class="col-12 col-md-4 q-pa-sm">
+                          <q-select
+                            dark
+                            v-model="user.sex"
+                            :model-value="user.sex"
+                            :options="options"
+                            type="text"
+                            label="Пол"
+                            stack-label
+                          >
+                            <template v-slot:prepend>
+                              <q-icon name="person"/>
+                            </template>
+                          </q-select>
+                        </div>
+                        <div class="col-12 col-md-4 q-pa-sm">
+                          <q-input
+                            v-model.trim="v$.user.phone.$model"
+                            :class="status(v$.user.phone)"
+                            dark
+                            dense
+                            class="q-mb-md"
+                            label="Телефон *">
+                            <template v-slot:prepend>
+                              <q-icon name="phone"/>
+                            </template>
+                          </q-input>
+                          <div class="input-errors" v-for="error of v$.user.phone.$errors" :key="error.$uid">
+                            <div class="text-red">{{ error.$message }}</div>
                           </div>
-                          <div class="col-12 col-md-4 q-pa-sm">
-                              <q-input dark
-                                v-model="user.phone"
-                                id="input5"
-                                type="text"
-                                outlined
-                                label="Телефон"
-                                stack-label
-                              >
-                                <template v-slot:prepend>
-                                  <q-icon name="phone"/>
-                                </template>
-                              </q-input>
-                            </div>
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="col-12"
+                  </div>
+                  <div
+                    class="col-12"
+                  >
+                    <q-btn
+                      @click="submitProfileForm"
+                      type="button"
+                      class="bg-primary q-ma-sm text-white"
                     >
-                      <q-btn
-                        @click="submitProfileForm"
-                        class="bg-primary q-ma-sm text-white"
-                      >
-                        Обновить информацию
-                      </q-btn>
-                      <p v-if="this.message" class="text-success">
-                        {{ message }}
-                      </p>
-                    </div>
-                  </form>
-                  <form @submit.prevent="submitPasswordForm">
-                    <div class="row q-pb-md q-pt-md">
-                      <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
-                        <q-input dark
-                                 v-model="passwordForm.current_password"
-                                 class="mt-1"
-                                 id="new-password"
-                                 type="password"
-                                 outlined
-                                 label="Старый пароль"
-                                 stack-label
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="lock"/>
-                          </template>
-                        </q-input>
-                      </div>
-                      <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
-                        <q-input dark
-                                 v-model="passwordForm.password"
-                                 class="mt-1"
-                                 id="new-password"
-                                 type="password"
-                                 outlined
-                                 label="Новый пароль"
-                                 stack-label
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="lock"/>
-                          </template>
-                        </q-input>
-                      </div>
-                      <div class="col-12 col-md-6 q-pa-sm pl-md-0 mt-2 q-pa-sm">
-                        <q-input dark
-                                 v-model="passwordForm.password_confirmation"
-                                 class="mt-1"
-                                 id="passwordConfirmation"
-                                 type="password"
-                                 outlined
-                                 label="Подтвердите пароль"
-                                 stack-label
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="lock"/>
-                          </template>
-                        </q-input>
-                      </div>
-                      <div
-                        class="col-12 q-pa-sm"
-                      >
-                        <q-btn
-                          @click="submitPasswordForm"
-                          class="bg-primary text-white"
-                        >
-                          Обновить пароль
-                        </q-btn>
-                      </div>
-                    </div>
-                  </form>
-
-                </div>
+                      Обновить информацию
+                    </q-btn>
+                    <p v-if="this.message" class="text-success">
+                      {{ message }}
+                    </p>
+                  </div>
+                </form>
+                <change-password/>
               </div>
+            </div>
           </q-tab-panel>
           <q-tab-panel dark name="requisite">
-<!--            <div class="text-h6 text-white">Ваши Реквизиты</div>-->
-              <div class="row">
-                <div class="col-12 col-md-12">
-                  <form
-                  >
-                    <div class="row justify-between">
-                      <div class="col-12 col-md-9">
-                        <div v-if="store.state.wallets" class="row q-pb-md">
-                          <div v-for="(wallet, index) in store.state.wallets.data" :key="index" class="col-12 col-md-4 q-pa-sm">
-                            <q-input dark
-                              v-model="wallet.external"
-                              class="mt-1"
-                              type="text"
-                              outlined
-                              :label="wallet.currency?.name"
-                              stack-label
-                            >
-                              <template v-slot:append>
-                               <q-btn @click="updateWallet(wallet.id, wallet.external)">Сохранить</q-btn>
-                              </template>
-                            </q-input>
-                          </div>
+            <!--            <div class="text-h6 text-white">Ваши Реквизиты</div>-->
+            <div class="row">
+              <div class="col-12 col-md-12">
+                <form
+                >
+                  <div class="row justify-between">
+                    <div class="col-12 col-md-9">
+                      <div v-if="store.state.wallets" class="row q-pb-md">
+                        <div v-for="(wallet, index) in store.state.wallets.data" :key="index"
+                             class="col-12 col-md-4 q-pa-sm">
+                          <q-input dark
+                                   v-model="wallet.external"
+                                   class="mt-1"
+                                   type="text"
+                                   outlined
+                                   :label="wallet.currency?.name"
+                                   stack-label
+                          >
+                            <template v-slot:append>
+                              <q-btn @click="updateWallet(wallet.id, wallet.external)">Сохранить</q-btn>
+                            </template>
+                          </q-input>
                         </div>
                       </div>
                     </div>
-                      <p v-if="this.message" class="text-success">
-                        {{ message }}
-                      </p>
-                  </form>
-                </div>
+                  </div>
+                  <p v-if="this.message" class="text-success">
+                    {{ message }}
+                  </p>
+                </form>
               </div>
+            </div>
           </q-tab-panel>
 
           <q-tab-panel dark name="pack">
-<!--            <div class="text-h6 text-white">Платежи</div>-->
+            <!--            <div class="text-h6 text-white">Платежи</div>-->
             <div v-if="payments" class="row">
               <q-card dark class="col-12 col-md-6" v-for="(payment, index) in payments" :key="index">
                 <q-card-section>
-                  <div class="text-h6">{{payment.name}}</div>
-                  <div class="text-subtitle2">{{payment.sum}}{{payment.currency}}</div>
+                  <div class="text-h6">{{ payment.name }}</div>
+                  <div class="text-subtitle2">{{ payment.sum }}{{ payment.currency }}</div>
                 </q-card-section>
                 <q-card-section>
                   <div class="text-h6">Платёжная система</div>
-                  <div class="text-subtitle2">{{payment.system}}</div>
+                  <div class="text-subtitle2">{{ payment.system }}</div>
                 </q-card-section>
-                <q-separator />
+                <q-separator/>
                 <q-input dark color="teal" filled v-model="sum" label="Введите сумму:">
                   <template v-slot:prepend>
-                    <q-icon name="monetization_on" />
+                    <q-icon name="monetization_on"/>
                   </template>
                 </q-input>
-                <q-separator />
+                <q-separator/>
                 <q-card-actions vertical>
                   <q-btn color="primary">Вывести сумму</q-btn>
                 </q-card-actions>
@@ -239,41 +186,40 @@
 </template>
 
 <script>
-import VueQrcode from 'vue3-qrcode'
 import store from 'src/myStore'
+import useVuelidate from "@vuelidate/core";
+import {email, helpers, minLength, required, sameAs} from "@vuelidate/validators";
+import ChangePassword from "components/ChangePassword";
+
 export default {
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    VueQrcode,
-  },
-  setup(){
-    return{
-      store
+  components: {ChangePassword},
+  setup() {
+    return {
+      store,
+      v$: useVuelidate()
     }
   },
   data() {
     return {
-      payments:[
+      payments: [
         {
           name: 'U.S dollars',
-          system:'Perfect Money',
+          system: 'Perfect Money',
           sum: 2179.8,
           currency: '$'
         },
         {
           name: 'Bitcoins',
-          system:'Coinpayments',
+          system: 'Coinpayments',
           sum: 2326.5,
           currency: '฿'
         }
       ],
       tab: 'profile',
-      file: null,
       sum: null,
       user: null,
       wallets: null,
       errors: null,
-      successRegistration: false,
       options: [
         {
           label: 'Мужской',
@@ -285,21 +231,32 @@ export default {
         }
       ],
       message: null,
-      passwordForm: {
-        current_password: null,
-        password: null,
-        password_confirmation: null
-      },
-      passwordMessage: null,
-      passwordError: null
     };
+  },
+  validations() {
+    return {
+      user: {
+        email: {
+          required: helpers.withMessage('Email обязательное поле', required),
+          email: helpers.withMessage('Введите реальный Email', email)
+        },
+        name: {required: helpers.withMessage('Имя обязательное поле', required)},
+        phone: {required: helpers.withMessage('Телефон обязательное поле', required)},
+      },
+    }
   },
   mounted() {
     store.actions.GetWallets()
     this.user = {...store.state.user}
   },
   methods: {
-    notify(message,color) {
+    status(validation) {
+      return {
+        error: validation.$error,
+        dirty: validation.$dirty
+      }
+    },
+    notify(message, color) {
       this.$q.notify({
         message: message,
         color: color || 'primary',
@@ -312,11 +269,13 @@ export default {
           this.notify("Кошелек успешно обновлен", 'primary');
         })
         .catch(error => {
-          this.notify("Ошибка при обновлении кошелька", 'primary');
+          this.notify("Ошибка при обновлении кошелька", 'red');
         });
     },
     submitProfileForm() {
-      // if (this.$invalid) {
+      // this.v$.$validate()
+      // if (this.v$.$invalid) {
+      //   this.notify("Заполните верно все поля!", 'red');
       //   return;
       // }
 
@@ -327,33 +286,14 @@ export default {
         sex: this.user.sex,
       };
       this.message = null;
-      console.log(profile)
       store.actions.Update(profile)
         .then(() => {
           this.notify("Профиль успешно обновлен", 'primary');
         })
         .catch(error => {
-          this.notify("Ошибка при обновлении профиля",'red');
+          this.notify("Ошибка при обновлении профиля", 'red');
         });
     },
-    submitPasswordForm() {
-      // const password = {
-      //   password: this.passwordForm.password,
-      //   password: this.passwordForm.password,
-      //   password_confirmation: this.passwordForm.passwordConfirmation
-      // };
-
-      this.passwordMessage = null;
-      this.passwordError = null;
-
-      store.actions.UpdatePassword(this.passwordForm)
-        .then(() => {
-          this.passwordMessage = "Пароль успешно обновлен";
-        })
-        .catch(() => {
-          this.passwordError = "Ошибка при обновлении пароля";
-        });
-    }
   }
 };
 </script>

@@ -1,24 +1,11 @@
 import store from '../myStore/'
-import {createRouter, createWebHistory} from "vue-router";
-
-const ifNotAuthenticated = (to, from, next) => {
-  // if (store.getters.isAuthenticated()) {
-  next();
-  // return
-  // }
-  // next("/auth").catch(() => {});
-
-};
-
-// eslint-disable-next-line no-unused-vars
-const ifAuthenticated = (to, from, next) => {
-  if (!store.getters.isAuthenticated()) {
-    next();
-    return;
+const authGuard = (to, from, next) => {
+  if (store.getters.isAuthenticated()) {
+    next()
+  } else {
+    next('/auth')
   }
-  localStorage.setItem("intended", to.path);
-  next("/");
-};
+}
 const routes = [
   {
     path: '/',
@@ -26,15 +13,7 @@ const routes = [
     children: [
       {
         path: '',
-        beforeEnter: ifNotAuthenticated,
-        children: [
-          {
-            name: "transactions",
-            path: "transactions",
-            beforeEnter: ifNotAuthenticated,
-            component: () => import("pages/User/Transactions.vue")
-          },
-        ],
+        beforeEnter: authGuard,
         component: () => import('pages/User/Dashboard.vue'),
       },
       {
@@ -45,38 +24,46 @@ const routes = [
       {
         name: "profile",
         path: "profile",
-        beforeEnter: ifNotAuthenticated,
+        beforeEnter: authGuard,
         component: () => import("pages/User/Profile.vue"),
 
       },
       {
         name: "news",
-        path: "news",
-        beforeEnter: ifNotAuthenticated,
+        path: "/news",
+        children: [
+          {
+            name: "newspage",
+            path: "news/:id",
+            beforeEnter: authGuard,
+            component: () => import("pages/News/NewsPage.vue")
+          },
+        ],
+        beforeEnter: authGuard,
         component: () => import("pages/News/News.vue")
       },
       {
         name: "transactions",
         path: "transactions",
-        beforeEnter: ifNotAuthenticated,
+        beforeEnter: authGuard,
         component: () => import("pages/User/Transactions.vue")
       },
       {
         name: "deposits",
         path: "deposits",
-        beforeEnter: ifNotAuthenticated,
+        beforeEnter: authGuard,
         component: () => import("pages/User/Deposits.vue")
       },
       {
         name: "referal",
         path: "referal",
-        beforeEnter: ifNotAuthenticated,
+        beforeEnter: authGuard,
         component: () => import("pages/User/Referal.vue")
       },
       {
         name: "statistics",
         path: "statistics",
-        beforeEnter: ifNotAuthenticated,
+        beforeEnter: authGuard,
         component: () => import("pages/Statistics/Statistics.vue")
       },
       {

@@ -22,11 +22,11 @@
 
     <q-tab-panels  style="padding:0!important;" class="no-padding bg-dark" v-model="tab" animated>
       <q-tab-panel dark  name="login">
-        <login-register @hide="close" :tab="tab"/>
+        <login/>
       </q-tab-panel>
 
       <q-tab-panel dark style="padding:0!important;" name="register">
-        <login-register @hide="close" :tab="tab"/>
+        <register/>
       </q-tab-panel>
 
     </q-tab-panels>
@@ -40,7 +40,8 @@
 </style>
 
 <script>
-  import LoginRegister from "./LoginRegister";
+  import Login from "pages/Auth/Login";
+  import Register from "pages/Auth/Register";
 
   export default {
     data() {
@@ -48,6 +49,6 @@
         tab: 'login'
       }
     },
-    components: {LoginRegister}
+    components: {Register, Login}
   }
 </script>

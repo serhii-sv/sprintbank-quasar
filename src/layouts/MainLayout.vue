@@ -48,7 +48,7 @@ export default defineComponent({
   name: 'MainLayout',
   components: {AppNav},
   mounted() {
-    !store.getters.isAuthenticated()?this.$router.push('/auth'): null
+    // !store.getters.isAuthenticated()?this.$router.push('/auth'): null
   },
   setup(props, { emit }) {
 

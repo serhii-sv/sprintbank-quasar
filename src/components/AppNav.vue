@@ -105,6 +105,9 @@ export default {
     }
   },
   props: ['contentclass'],
+  mounted() {
+    console.log(this.store.getters.isAuthenticated())
+    },
   methods: {
     logout() {
       store.actions.authLogout()
