@@ -20,10 +20,10 @@ const options = {
       clientId: '78bfc07e1f25b5e22c26',
       redirectUri: 'https://diadal.com.ng/auth/github/callback'
     },
-    // google: {
-    //   clientId: '***************',
-    //   redirectUri: 'https://myapp.com/auth/google/callback'
-    // },
+     google: {
+       clientId: '591251071702-33ghholu5he15g7essahpdcv0l9j00do.apps.googleusercontent.com',
+       redirectUri: 'https://developers.google.com/oauthplayground'
+     },
     // facebook: {
     //   clientId: '************',
     //   redirectUri: 'https://myapp.com/auth/facebook/callback'

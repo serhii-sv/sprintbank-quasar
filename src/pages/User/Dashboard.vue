@@ -8,7 +8,7 @@
   <div class="q-pt-md">
     <div class="q-px-md">
       <p class="text-h6 text-weight-light">Здравствуй {{ store?.getters.getUser()?.name }}!</p>
-      <p class="text-h5">Ненастное утро может смениться ясным днём.</p>
+      <p class="text-h5">Добро пожаловать!</p>
     </div>
     <!--    <card-social icon_position="right" />-->
     <card-charts/>

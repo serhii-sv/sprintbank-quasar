@@ -35,7 +35,6 @@
           Логин
         </q-btn>
       </div>
-      <SocialLogin/>
     </q-form>
   </div>
 </template>
@@ -48,13 +47,11 @@ p {
 </style>
 
 <script>
-import SocialLogin from "pages/Auth/SocialLogin";
 import store from "src/myStore";
 import {email, helpers, required} from '@vuelidate/validators'
 import useVuelidate from "@vuelidate/core";
 
 export default {
-  components: {SocialLogin},
   setup() {
     return {
       store,
