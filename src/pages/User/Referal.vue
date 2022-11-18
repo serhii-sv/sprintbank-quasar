@@ -7,9 +7,8 @@
       <!--      </template>-->
       <template #title>Реферальная система</template>
     </page-header>
-  <q-table
+  <q-table no-data-label="Нет данных"
     v-if="store.state.userStatistics"
-    dark
     class="my-sticky-header-column-table"
     title=""
     :rows="store.state.userStatistics.data"
@@ -17,9 +16,8 @@
     row-key="name"
     :rows-per-page-options="[0]"
   />
-    <q-table
+    <q-table no-data-label="Нет данных"
       v-if="store.state.referrals"
-      dark
       class="my-sticky-header-column-table"
       title=""
       :rows="store.state.referrals.data"

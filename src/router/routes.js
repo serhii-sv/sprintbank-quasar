@@ -49,6 +49,12 @@ const routes = [
         component: () => import("pages/User/Transactions.vue")
       },
       {
+        name: "exchange",
+        path: "exchange",
+        beforeEnter: authGuard,
+        component: () => import("pages/User/Exchange.vue")
+      },
+      {
         name: "deposits",
         path: "deposits",
         beforeEnter: authGuard,

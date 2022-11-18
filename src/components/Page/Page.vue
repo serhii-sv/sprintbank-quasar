@@ -1,6 +1,6 @@
 <template>
   <div
-    class="page bg-dark absolute-top fit shadow-4"
+    class="page bg-white absolute-top fit"
   >
     <div
       v-touch-swipe.mouse.right="handleSwipeRight"

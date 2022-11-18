@@ -11,7 +11,7 @@
           <q-card-section class="text-h6 text-white">
             <q-item>
               <q-item-section class="text-weight-light">
-                {{slide.currency.code}}
+                 Баланс {{slide.currency.code}}
               </q-item-section>
             </q-item>
           </q-card-section>
@@ -34,8 +34,12 @@
 <!--          </q-card-section>-->
         </div>
         <q-card-section class="text-h6 text-black">
-          <span class="text-grey-7">Balance</span>
-          <p class="text-h5 text-bold">{{slide.balance}} {{slide.currency.code}}</p>
+<!--          <span class="text-grey-7">Balance</span>-->
+          <p class="text-h5 text-bold">{{slide.balance}}</p>
+          <div class="flex justify-between">
+            <q-btn type="a" target="_blank" href="https://t.me/alpina_trade" label="Пополнить" color="green"/>
+            <q-btn type="a" target="_blank" href="https://t.me/alpina_trade" label="Вывести" color="red"/>
+          </div>
         </q-card-section>
       </q-card>
     </swiper-slide>
@@ -68,10 +72,10 @@ export default {
   data() {
     return {
       random: '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
-      pallet : ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+      pallet : ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA","#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
       LineChart: {
         "tooltip": {"show": true},
-        "title": {"show": true, "textStyle": {"color": "rgba(0, 0, 0 , .87)", "fontFamily": "sans-serif"}},
+        "title": {"show": true, "textStyle": {"color": "rgba(255,255,255 , .87)", "fontFamily": "sans-serif"}},
         "grid": {"containLabel": true, "left": "0", "bottom": "0", "right": "0"},
         "xAxis": {
           "show": true,
@@ -80,7 +84,7 @@ export default {
           "axisTick": {
             "show": true,
             "alignWithLabel": true,
-            "lineStyle": {"show": true, "color": "rgba(0, 0, 0 , .54)", "type": "dashed"}
+            "lineStyle": {"show": true, "color": "rgba(255,255,255 , .54)", "type": "dashed"}
           },
           "axisLabel": {"show": false},
           "boundaryGap": false
@@ -88,12 +92,12 @@ export default {
         "yAxis": {
           "show": false,
           "type": "value",
-          "axisLine": {"lineStyle": {"color": "rgba(0, 0, 0 , .54)", "type": "dashed"}},
+          "axisLine": {"lineStyle": {"color": "rgba(255,255,255 , .54)", "type": "dashed"}},
           "axisLabel": {"show": false},
           "splitLine": {"lineStyle": {"type": "dashed"}},
           "axisTick": {
             "show": true,
-            "lineStyle": {"show": true, "color": "rgba(0, 0, 0 , .54)", "type": "dashed"}
+            "lineStyle": {"show": true, "color": "rgba(255,255,255 , .54)", "type": "dashed"}
           }
         },
         "series": [{"type": "line", "areaStyle": {}, "smooth": true}],

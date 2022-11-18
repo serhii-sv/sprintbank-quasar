@@ -1,6 +1,6 @@
 {
-  "appId": "quasar.sprint.bank.app",
-  "appName": "Sprint Bank",
+  "appId": "quasar.alpha.trade.app",
+  "appName": "Alpina Trade",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www"

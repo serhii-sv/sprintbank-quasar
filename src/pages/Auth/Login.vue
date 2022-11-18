@@ -1,8 +1,7 @@
 <template>
-  <div class="full-width q-pa-sm bg-dark">
+  <div class="full-width q-pa-sm bg-white">
     <q-form @submit="submitForm">
       <q-input
-        dark
         dense
         v-model.trim="v$.email.$model"
         :class="status(v$.email)"
@@ -18,7 +17,6 @@
       <q-input
         v-model.trim="v$.password.$model"
         :class="status(v$.password)"
-        dark
         dense
         class="q-mb-md"
         type="password"
@@ -32,7 +30,7 @@
         <q-btn
           class="bg-primary text-white q-mt-md"
           type="submit">
-          Логин
+          Войти
         </q-btn>
       </div>
     </q-form>
@@ -60,15 +58,16 @@ export default {
   },
   data() {
     return {
-      email: this.user ? this.user.email : 'admin@gmail.com',
+      email: null,
+      // email: this.user ? this.user.email : 'inventore.deserunt',
       error: null,
-      password: 'admin',
+      // password: 'demopassword',
+      password: null,
     }
   },
   validations() {
     return {
-      email: {required: helpers.withMessage('Email обязательное поле', required),
-        email: helpers.withMessage('Введите реальный Email', email)},
+      email: {required: helpers.withMessage('Email обязательное поле', required)},
       password: {required: helpers.withMessage('Пароль обязательное поле', required)},
     }
   },

@@ -5,7 +5,7 @@
         <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
 <!--          <div class="text-h6 float-left q-ml-md q-mt-sm">Pagination With Filters</div>-->
           <q-space/>
-          <q-select dark dense outlined style="min-width: 200px" v-model="type" :options="['Все','Категория1','Категория2']"
+          <q-select dense outlined style="min-width: 200px" v-model="type" :options="['Все','Категория1','Категория2']"
                     class="float-right" label="Категория"/>
         </div>
       </q-card-section>

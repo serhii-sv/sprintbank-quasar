@@ -51,7 +51,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       env: {
-        API_URL: 'https://wallstreet.sprint-bank.com/api/v1'
+        API_URL: 'https://wallstreet.alpina.trade/api/v1'
       },
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
@@ -145,9 +145,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `Sprint Bank`,
-        short_name: `Sprint Bank`,
-        description: `Sprint Bank Application`,
+        name: `Alpina Trade`,
+        short_name: `Alpina Trade`,
+        description: `Alpina Trade Application`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

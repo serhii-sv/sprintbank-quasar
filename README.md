@@ -1,6 +1,6 @@
-# Sprint Bank (sprint)
+# Alpina Trade
 
-Sprint Bank Application
+Alpina Trade Application
 
 ## Install the dependencies
 ```bash

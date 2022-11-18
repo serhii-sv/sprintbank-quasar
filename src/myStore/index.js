@@ -30,12 +30,14 @@ const state = reactive({
 
   ],
   transactions: null,
+  exchangeresult: null,
+  exchangewallets: null,
   transactionsChart: null,
   deposits: null,
   wallets: null,
   referrals: null,
   userStatistics: null,
-  sprintToken: null,
+  token: null,
   access_token: localStorage.getItem('access_token'),
   user: JSON.parse(localStorage.getItem('user')),
   usePageTransition: false,
@@ -84,12 +86,57 @@ const actions = {
         return {error};
       });
   },
-  GetSprintToken: () => {
+  GetToken: () => {
     return axios
-      .get(`${api}/graphs/sprint-token`)
+      .get(`${api}/graphs/token`)
       .then(response => {
         if (response.data) {
-          state.sprintToken = response.data.data
+          state.token = response.data.data
+          return response.data.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetExchangeResult: (body) => {
+    return axios
+      .get(`${api}/exchange-result?wallet_from=${body.wallet_from}&wallet_to=${body.wallet_id}&amount=${body.amount}
+`)
+      .then(response => {
+        if (response.data) {
+          state.exchangeresult = response.data
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  Exchange: (body) => {
+    return axios
+      .post(`${api}/exchange`, body)
+      .then(response => {
+        if (response.data) {
+          state.exchangeresult = response.data
+         actions.GetExchangeWallets().then(r => console.log(r))
+          return response.data;
+        }
+        return false;
+      })
+      .catch(error => {
+        return {error};
+      });
+  },
+  GetExchangeWallets: () => {
+    return axios
+      .get(`${api}/exchange
+`)
+      .then(response => {
+        if (response.data) {
+          state.exchangewallets = response.data.data
           return response.data.data;
         }
         return false;

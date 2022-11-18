@@ -8,7 +8,7 @@
       <template #title>Транзакции</template>
     </page-header>
     <div>
-    <q-table
+    <q-table no-data-label="Нет данных"
       class="my-sticky-header-column-table"
       title=""
       :rows="store.state.transactions?.data?.data?.slice(count || 0)"
@@ -17,7 +17,6 @@
       row-key="name"
       :hide-bottom="!!count"
       :rows-per-page-options="[0]"
-      dark
     >
       <template v-slot:body-cell-Status="props">
         <q-td :props="props" class="text-left">

@@ -7,7 +7,6 @@
       </template>
       <div v-if="!sent">
         <q-input
-          dark
           dense
           v-model="email"
           class="q-mb-md"
@@ -21,14 +20,12 @@
       </div>
       <div v-if="sent && !confirmed">
         <q-input
-          dark
           dense
           v-model="token"
           class="q-mb-md"
           type="password"
           label="Введите код который пришел вам на Email *"/>
         <q-input
-          dark
           dense
           v-model="password"
           class="q-mb-md"
@@ -38,7 +35,6 @@
         <!--          Пароль обязательное поле-->
         <!--        </p>-->
         <q-input
-          dark
           dense
           v-model="password_confirmation"
           class="q-mb-md"

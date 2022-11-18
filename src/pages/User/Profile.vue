@@ -20,8 +20,8 @@
           <!--          <q-tab class="w-100" label="Платежи" name="pack"/>-->
         </q-tabs>
         <q-separator/>
-        <q-tab-panels class="bg-dark" v-model="tab" animated>
-          <q-tab-panel dark name="profile">
+        <q-tab-panels class="bg-white" v-model="tab" animated>
+          <q-tab-panel name="profile">
             <!--            <div class="text-h6 text-white">Профайл</div>-->
             <div class="row">
               <div class="col-12 col-md-12">
@@ -33,7 +33,6 @@
                       <div class="row">
                         <div class="col-12 col-md-6 q-pa-sm">
                           <q-input
-                            dark
                             dense
                             v-model.trim="v$.user.email.$model"
                             :class="status(v$.user.email)"
@@ -52,7 +51,6 @@
                           <q-input
                             v-model.trim="v$.user.name.$model"
                             :class="status(v$.user.name)"
-                            dark
                             dense
                             class="q-mb-md"
                             label="ФИО *"
@@ -67,7 +65,6 @@
                         </div>
                         <div class="col-12 col-md-4 q-pa-sm">
                           <q-select
-                            dark
                             v-model="user.sex"
                             :model-value="user.sex"
                             :options="options"
@@ -84,7 +81,6 @@
                           <q-input
                             v-model.trim="v$.user.phone.$model"
                             :class="status(v$.user.phone)"
-                            dark
                             dense
                             class="q-mb-md"
                             label="Телефон *">
@@ -118,7 +114,7 @@
               </div>
             </div>
           </q-tab-panel>
-          <q-tab-panel dark name="requisite">
+          <q-tab-panel name="requisite">
             <!--            <div class="text-h6 text-white">Ваши Реквизиты</div>-->
             <div class="row">
               <div class="col-12 col-md-12">
@@ -129,7 +125,7 @@
                       <div v-if="store.state.wallets" class="row q-pb-md">
                         <div v-for="(wallet, index) in store.state.wallets.data" :key="index"
                              class="col-12 col-md-4 q-pa-sm">
-                          <q-input dark
+                          <q-input
                                    v-model="wallet.external"
                                    class="mt-1"
                                    type="text"
@@ -156,7 +152,7 @@
           <q-tab-panel dark name="pack">
             <!--            <div class="text-h6 text-white">Платежи</div>-->
             <div v-if="payments" class="row">
-              <q-card dark class="col-12 col-md-6" v-for="(payment, index) in payments" :key="index">
+              <q-card  class="col-12 col-md-6" v-for="(payment, index) in payments" :key="index">
                 <q-card-section>
                   <div class="text-h6">{{ payment.name }}</div>
                   <div class="text-subtitle2">{{ payment.sum }}{{ payment.currency }}</div>
@@ -166,7 +162,7 @@
                   <div class="text-subtitle2">{{ payment.system }}</div>
                 </q-card-section>
                 <q-separator/>
-                <q-input dark color="teal" filled v-model="sum" label="Введите сумму:">
+                <q-input color="teal" filled v-model="sum" label="Введите сумму:">
                   <template v-slot:prepend>
                     <q-icon name="monetization_on"/>
                   </template>

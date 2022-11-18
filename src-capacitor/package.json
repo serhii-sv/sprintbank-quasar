@@ -1,7 +1,7 @@
 {
   "name": "sprint",
   "version": "0.0.1",
-  "description": "Sprint Bank Application",
+  "description": "Alpina Trade Application",
   "author": "Alexandr Degteari <alexdevelopermd@gmail.com>",
   "private": true,
   "dependencies": {

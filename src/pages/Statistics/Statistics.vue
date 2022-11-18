@@ -1,24 +1,24 @@
 <template>
   <div>
     <page-header v-if="$route.fullPath !== '/'">
-      <template #title>Курс SprintToken</template>
+      <template #title>Курс ALP</template>
     </page-header>
     <div>
       <q-item class="bg-black">
         <q-item-section top avatar>
-          <q-img :src="store.state.sprintToken?.icon" alt=""/>
+          <q-img :src="store.state.token?.icon" alt=""/>
         </q-item-section>
         <q-item-section>
-          <q-item-label class="text-h6 text-white">{{ store.state.sprintToken?.name }}</q-item-label>
+          <q-item-label class="text-h6 text-white">{{ store.state.token?.name }}</q-item-label>
         </q-item-section>
         <q-item-section>
           <q-item-label class="text-h6 text-white text-right">
-                        <q-icon size="30px" :color="store.state.sprintToken?.rate_exchange_percentage > 0?'green':'red'"
-                                :name="store.state.sprintToken?.rate_exchange_percentage > 0?'arrow_drop_up':'arrow_drop_down'"/>
-            {{ store.state.sprintToken?.current_rate }}
+                        <q-icon size="30px" :color="store.state.token?.rate_exchange_percentage > 0?'green':'red'"
+                                :name="store.state.token?.rate_exchange_percentage > 0?'arrow_drop_up':'arrow_drop_down'"/>
+            {{ store.state.token?.current_rate }}
           </q-item-label>
           <q-item-label class="text-grey-7 text-bold text-right" caption>
-                        {{ store.state.sprintToken?.rate_exchange_percentage > 0 ? '+' : '' }}{{ store.state.sprintToken?.rate_exchange_percentage }}%
+                        {{ store.state.token?.rate_exchange_percentage > 0 ? '+' : '' }}{{ store.state.token?.rate_exchange_percentage }}%
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -32,7 +32,7 @@
         align="justify"
       >
         {{ tab.name }}
-        <q-tab v-for="(tab, key) in store.state.sprintToken?.cyrrency_rate_log"
+        <q-tab v-for="(tab, key) in store.state.token?.cyrrency_rate_log"
                :key="key"
                class="no-padding rounded-borders"
                :name="tab.name"
@@ -46,7 +46,7 @@
       >
         <q-tab-panel
           class="no-padding"
-          v-for="(tab, key) in store.state.sprintToken?.cyrrency_rate_log"
+          v-for="(tab, key) in store.state.token?.cyrrency_rate_log"
           :key="key"
           :name="tab.name"
         >
@@ -117,14 +117,14 @@ export default {
         },
         "series": [{"type": "line", "areaStyle": {}, "smooth": true}],
         "dataset": {
-          "source": this.store.state.sprintToken?.cyrrency_rate_log[i]?.data
+          "source": this.store.state.token?.cyrrency_rate_log[i]?.data
         },
         "color": ["green"]
       }
     },
   },
   mounted() {
- store.actions.GetSprintToken()
+ store.actions.GetToken()
   },
 }
 </script>

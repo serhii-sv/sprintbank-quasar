@@ -1,8 +1,7 @@
 <template>
-  <div class="full-width q-pa-sm bg-dark">
+  <div class="full-width q-pa-sm bg-white">
     <q-form @submit="submitForm">
       <q-input
-        dark
         dense
         v-model.trim="v$.email.$model"
         :class="status(v$.email)"
@@ -15,7 +14,6 @@
       <q-input
         v-model.trim="v$.name.$model"
         :class="status(v$.name)"
-        dark
         dense
         class="q-mb-md"
         label="ФИО *"
@@ -26,16 +24,19 @@
       <q-input
         v-model.trim="v$.phone.$model"
         :class="status(v$.phone)"
-        dark
         dense
         class="q-mb-md"
         label="Телефон *"/>
+      <q-input
+        v-model.trim="referral"
+        dense
+        class="q-mb-md"
+        label="Ваш пригласитель"/>
       <div class="input-errors" v-for="error of v$.phone.$errors" :key="error.$uid">
-        <div class="text-red">{{ error.$message }}</div>
+        <div class="text-red">{error.$message }}</div>
       </div>
       <q-select
         v-model="sex"
-        dark
         dense
         :options="options"
         type="text"
@@ -45,7 +46,6 @@
       <q-input
         v-model.trim="v$.password.$model"
         :class="status(v$.password)"
-        dark
         dense
         class="q-mb-md"
         type="password"
@@ -59,7 +59,6 @@
       <q-input
         v-model.trim="v$.passwordConfirmation.$model"
         :class="status(v$.passwordConfirmation)"
-        dark
         dense
         class="q-mb-md"
         type="password"
@@ -106,6 +105,7 @@ export default {
     return {
       email: 'admin@gmail.com',
       name: null,
+      referral: null,
       phone: null,
       error: null,
       sex: null,

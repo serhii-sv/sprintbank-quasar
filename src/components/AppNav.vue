@@ -26,7 +26,7 @@
       >
         <div class="flex-center column">
           <q-icon size="24px" v-if="$q.screen.lt.sm" name="fas fa-user"></q-icon>
-          <span class="hide-xs">Логин</span>
+          <span class="hide-xs">Вход</span>
         </div>
       </q-route-tab>
       <q-btn
@@ -49,12 +49,21 @@
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>
+            <q-item :to="{ path: '/exchange' }" v-close-popup>
+              <q-item-section avatar>
+                <q-avatar color="black" text-color="white" icon="fas fa-sync"/>
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class="text-white">Биржа валют</q-item-label>
+              </q-item-section>
+              <q-item-section side></q-item-section>
+            </q-item>
             <q-item :to="{ path: '/statistics' }" v-close-popup>
               <q-item-section avatar>
                 <q-avatar color="black" text-color="white" icon="fas fa-chart-line"/>
               </q-item-section>
               <q-item-section>
-                <q-item-label class="text-white">Курс SprintToken</q-item-label>
+                <q-item-label class="text-white">Курс ALP</q-item-label>
               </q-item-section>
               <q-item-section side></q-item-section>
             </q-item>

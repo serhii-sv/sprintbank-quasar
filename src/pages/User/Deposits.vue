@@ -7,14 +7,13 @@
       <!--      </template>-->
       <template #title>Депозиты</template>
     </page-header>
-    <q-table
+    <q-table no-data-label="Нет данных"
       class="my-sticky-header-column-table"
       title=""
       :rows="store.state.deposits?.data?.data"
       :columns="columns"
       row-key="name"
       :rows-per-page-options="[0]"
-      dark
     />
   </div>
 </template>

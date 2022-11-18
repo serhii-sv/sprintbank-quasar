@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header>
-      <template #title><b>Sprint</b><span>Bank</span>
+      <template #title><span><q-img class="q-mr-sm" style="width: 30px" src="logo.png"/><b>Alpina</b><span>Trade</span></span>
       </template>
     </page-header>
 <!--    <page-body>-->

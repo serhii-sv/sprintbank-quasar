@@ -5,7 +5,6 @@
         <q-input
           v-model.trim="v$.passwordForm.current_password.$model"
           :class="status(v$.passwordForm.current_password)"
-          dark
           dense
           class="q-mb-md"
           type="password"
@@ -22,7 +21,6 @@
         <q-input
           v-model.trim="v$.passwordForm.password.$model"
           :class="status(v$.passwordForm.password)"
-          dark
           dense
           class="q-mb-md"
           type="password"
@@ -39,7 +37,6 @@
         <q-input
           v-model.trim="v$.passwordForm.password_confirmation.$model"
           :class="status(v$.passwordForm.password_confirmation)"
-          dark
           dense
           class="q-mb-md"
           type="password"

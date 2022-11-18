@@ -1,4 +1,4 @@
-package quasar.sprint.bank.app;
+package quasar.alpha.trade.app;
 
 import android.os.Bundle;
 

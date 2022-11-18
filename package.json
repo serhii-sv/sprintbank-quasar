@@ -1,11 +1,16 @@
 {
   "name": "sprint",
   "version": "0.0.1",
-  "description": "Sprint Bank Application",
-  "productName": "Sprint Bank",
+  "description": "Alpina Trade Application",
+  "productName": "Alpina Trade",
   "author": "Alexandr Degteari <alexdevelopermd@gmail.com>",
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
+    "dev:android": "quasar dev -m capacitor -T android",
+    "build:android": "quasar build -m capacitor -T android --ide",
+    "dev:ios": "quasar dev -m capacitor -T ios --ide",
+    "build:ios": "quasar build -m capacitor -T ios --ide",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
